@@ -55,7 +55,6 @@
   background-color: rgb(194, 94, 94);
 }
 
-/* Tablet view adjustments */
 @media (max-width: 768px) {
   .topic {
     font-size: 1rem;
@@ -82,7 +81,6 @@
   }
 }
 
-/* Mobile view adjustments */
 @media (max-width: 480px) {
   .topic {
     font-size: 0.6rem;
