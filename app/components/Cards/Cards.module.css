@@ -1,0 +1,83 @@
+.mainDiv {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  padding: 20px;
+}
+
+.image1,
+.image2,
+.image3 {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 320px;
+  height: auto;
+  margin: 10px;
+}
+
+.text1,
+.text2,
+.text3 {
+  position: absolute;
+  bottom: 10px;
+  background-color: white;
+  padding: 10px 20px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: color 0.3s;
+  text-align: center;
+  max-width: 90%;
+}
+
+.text1:hover,
+.text2:hover,
+.text3:hover {
+  color: rgb(153, 153, 153);
+}
+
+@media (max-width: 768px) {
+  .mainDiv {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .image1,
+  .image2,
+  .image3 {
+    width: 80vw;
+    max-width: 320px;
+  }
+
+  .text1,
+  .text2,
+  .text3 {
+    font-size: 1rem;
+    padding: 8px 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .mainDiv {
+    padding: 10px;
+    align-items: center;
+  }
+
+  .image1,
+  .image2,
+  .image3 {
+    width: 90vw;
+    max-width: 320px;
+  }
+
+  .text1,
+  .text2,
+  .text3 {
+    font-size: 0.9rem;
+    padding: 6px 12px;
+  }
+}

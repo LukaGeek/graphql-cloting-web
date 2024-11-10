@@ -1,0 +1,108 @@
+.mainDiv {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 50px;
+  height: auto;
+  padding: 20px;
+  box-sizing: border-box;
+  background-color: #f2f2f2;
+}
+
+.image {
+  position: relative;
+  width: 100%;
+  max-width: 500px;
+  height: auto;
+  margin: 0 auto;
+}
+
+.text {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  font-size: 36px;
+  font-weight: 500;
+  color: #282828;
+}
+
+.circles {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.circle {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid white;
+  border-radius: 50%;
+  width: 90px;
+  height: 90px;
+  background-color: white;
+}
+
+.circle span:first-of-type {
+  font-size: 24px;
+  font-weight: bolder;
+  color: #fe4c50;
+}
+
+.circle span:nth-of-type(2) {
+  font-size: 16px;
+  font-weight: bold;
+  color: #51545f;
+}
+
+.shop {
+  display: inline-flex;
+  justify-content: center;
+  padding: 10px 20px;
+  margin: 20px auto;
+  right: 20px;
+  border: 1px solid #282828;
+  border-radius: 3px;
+  font-weight: 500;
+  text-transform: uppercase;
+  color: #f2f2f2;
+  background-color: #1e1e27;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.shop:hover {
+  border-color: #535366;
+  background-color: #535366;
+}
+
+@media (min-width: 768px) {
+  .mainDiv {
+    flex-direction: row;
+    justify-content: space-around;
+  }
+  .text {
+    font-size: 45px;
+  }
+  .circle {
+    width: 120px;
+    height: 120px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .mainDiv {
+    padding: 40px;
+  }
+  .text {
+    font-size: 50px;
+  }
+  .circle span:first-of-type {
+    font-size: 50px;
+  }
+  .circle span:nth-of-type(2) {
+    font-size: 20px;
+  }
+}
