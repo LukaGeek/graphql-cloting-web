@@ -9,7 +9,7 @@ export default function NewProductCards({ name, cost, icon }) {
       <div>
         {/* Image */}
         <div className={classes.image}>
-          <Image src={icon} alt="" width={185} height={185} />
+          <Image src={icon} alt={name} width={185} height={185} />
         </div>
         {/* Favorites */}
         <div className={classes.favorite}>
@@ -28,7 +28,7 @@ export default function NewProductCards({ name, cost, icon }) {
         </div>
       </div>
       {/* Add to cart */}
-      <button className={classes.add_to_cart}>add to cart</button>
+      <button className={classes.add_to_cart}>Add to Cart</button>
     </div>
   );
 }
