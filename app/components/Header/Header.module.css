@@ -1,25 +1,46 @@
 .mainDiv {
   display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  height: auto;
-  padding: 10px 0;
+  justify-content: space-between;
+  height: 100px;
   background-color: #1e1e27;
 }
 
 .plainText {
-  margin: 0;
-  text-align: center;
+  display: flex;
   text-transform: uppercase;
-  color: white;
+  color: #b5aec4;
 }
 
-.comboboxCurr,
-.comboboxLang {
+.leftDiv {
   display: flex;
+  list-style: none;
+  color: #b5aec4;
+}
+
+.leftDiv li {
+  gap: 20px;
+}
+
+.leftDiv li button {
+  display: flex;
+  align-items: center;
+  background-color: red;
+}
+
+.leftDiv ul {
+  align-items: center;
   justify-content: center;
-  margin: 5px 0;
+  background-color: red;
+  visibility: visible;
+}
+
+.leftDiv ul li {
+  
+}
+
+.currency, .languages, .accounts {
+  display: flex;
+  align-items: center;
 }
 
 @media (min-width: 768px) {

@@ -17,9 +17,7 @@ export default function Navbar() {
         <div>pages</div>
         <div>blog</div>
         <div>contact</div>
-      </div>
-      <div className={classes.iconsDiv}>
-        <div>
+        <div className={classes.iconsDiv}>
           <div className={classes.icons}>
             <IoSearchSharp />
           </div>
