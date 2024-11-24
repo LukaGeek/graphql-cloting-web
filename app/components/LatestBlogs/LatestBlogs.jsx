@@ -14,8 +14,8 @@ export default function LatestBlogs() {
           <div className={classes.overlay}>
             <div className={classes.firstHeader}>Here are the trends I</div>
             <div className={classes.secondHeader}>see coming this fall</div>
-            <div className={classes.firstUser}>by admin | dec 01, 2017</div>
-            <span className={classes.firstButton}>Read more</span>
+            <div className={classes.author}>by admin | dec 01, 2017</div>
+            <span className={classes.readMore}>Read more</span>
           </div>
         </div>
         <div className={classes.imageContainer}>
@@ -23,8 +23,8 @@ export default function LatestBlogs() {
           <div className={classes.overlay}>
             <div className={classes.firstHeader}>Here are the trends I</div>
             <div className={classes.secondHeader}>see coming this fall</div>
-            <div className={classes.firstUser}>by admin | dec 01, 2017</div>
-            <span className={classes.firstButton}>Read more</span>
+            <div className={classes.author}>by admin | dec 01, 2017</div>
+            <span className={classes.readMore}>Read more</span>
           </div>
         </div>
         <div className={classes.imageContainer}>
@@ -32,8 +32,8 @@ export default function LatestBlogs() {
           <div className={classes.overlay}>
             <div className={classes.firstHeader}>Here are the trends I</div>
             <div className={classes.secondHeader}>see coming this fall</div>
-            <div className={classes.firstUser}>by admin | dec 01, 2017</div>
-            <span className={classes.firstButton}>Read more</span>
+            <div className={classes.author}>by admin | dec 01, 2017</div>
+            <span className={classes.readMore}>Read more</span>
           </div>
         </div>
       </div>

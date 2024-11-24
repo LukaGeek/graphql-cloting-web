@@ -10,6 +10,7 @@ import LatestBlogs from "./components/LatestBlogs/LatestBlogs";
 import Newsletter from "./components/Newsletter/Newsletter";
 import Footer from "./components/Footer/Footer";
 import { cardsData } from "./cardsData";
+import classes from "../page.module.css";
 
 export default function Home() {
   return (
@@ -20,17 +21,14 @@ export default function Home() {
       <Cards />
       <DealOfTheWeek />
       <BestSellers />
-      <div className="flex flex-wrap mt-10">
+      <div className={classes.pageDiv}>
         {cardsData[1].map((card, index) => (
-          <>
-            {/* აკეთებს NewProductCards-ის რენდერინგს */}
-            <NewProductCards
-              key={index}
-              name={card.name}
-              cost={card.cost}
-              icon={card.icon}
-            />
-          </>
+          <NewProductCards
+            key={index}
+            name={card.name}
+            cost={card.cost}
+            icon={card.icon}
+          />
         ))}
       </div>
       <ServiceInfo />

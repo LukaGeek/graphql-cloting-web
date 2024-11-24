@@ -1,10 +1,18 @@
+"use client";
+
+import { useState } from "react";
 import classes from "./Header.module.css";
 import { GoChevronDown } from "react-icons/go";
 import { FaSignOutAlt } from "react-icons/fa";
 import { IoMdPersonAdd } from "react-icons/io";
 
-
 export default function Header() {
+  const [activeDropdown, setActiveDropdown] = useState(null);
+
+  const toggleDropdown = (dropdownName) => {
+    setActiveDropdown(activeDropdown === dropdownName ? null : dropdownName);
+  };
+
   return (
     <div className={classes.mainDiv}>
       <div className={classes.plainText}>
@@ -12,11 +20,13 @@ export default function Header() {
       </div>
       <div className={classes.leftDiv}>
         <li className={classes.currency}>
-          <button>
+          <button onClick={() => toggleDropdown("currency")}>
             USD
             <GoChevronDown />
           </button>
-          <ul className={classes.currencySelection}>
+          <ul
+            className={`${activeDropdown === "currency" ? classes.open : ""}`}
+          >
             <li>CAD</li>
             <li>AUD</li>
             <li>EUR</li>
@@ -24,11 +34,13 @@ export default function Header() {
           </ul>
         </li>
         <li className={classes.languages}>
-          <button>
+          <button onClick={() => toggleDropdown("languages")}>
             English
             <GoChevronDown />
           </button>
-          <ul className={classes.languageSelection}>
+          <ul
+            className={`${activeDropdown === "languages" ? classes.open : ""}`}
+          >
             <li>French</li>
             <li>Georgian</li>
             <li>Russian</li>
@@ -36,24 +48,26 @@ export default function Header() {
           </ul>
         </li>
         <li className={classes.accounts}>
-          <button>
+          <button onClick={() => toggleDropdown("accounts")}>
             My Account
             <GoChevronDown />
-            </button>
-            <ul className={classes.accountSelection}>
-              <li>
-                <button>
+          </button>
+          <ul
+            className={`${activeDropdown === "accounts" ? classes.open : ""}`}
+          >
+            <li>
+              <button>
                 <FaSignOutAlt />
-                  Sign In
-                  </button>
-                </li>
-              <li>
-                <button>
+                Sign In
+              </button>
+            </li>
+            <li>
+              <button>
                 <IoMdPersonAdd />
-                  Sign Up
-                  </button>
-              </li>
-            </ul>
+                Sign Up
+              </button>
+            </li>
+          </ul>
         </li>
       </div>
     </div>
