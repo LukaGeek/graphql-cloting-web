@@ -22,11 +22,10 @@ export default function Navbar() {
             <IoSearchSharp />
           </div>
           <div className={classes.icons}>
-            <FaUser />
-          </div>
-
-          <div className={classes.icons}>
             <FaCartShopping />
+          </div>
+          <div className={classes.icons}>
+            <FaUser />
           </div>
         </div>
       </div>

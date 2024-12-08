@@ -1,34 +1,16 @@
-import classes from "./NewProductCards.module.css";
-import Image from "next/image";
-import { MdFavoriteBorder } from "react-icons/md";
+import { cardsData } from "../../cardsData";
+import Card from "./Card";
 
-export default function NewProductCards({ name, cost, icon }) {
+export default function NewProductCards() {
   return (
-    <div className={classes.product}>
-      {/* Product */}
-      <div>
-        {/* Image */}
-        <div className={classes.image}>
-          <Image src={icon} alt={name} width={185} height={185} />
-        </div>
-        {/* Favorites */}
-        <div className={classes.favorite}>
-          <MdFavoriteBorder />
-        </div>
-        {/* Sale */}
-        <div className={classes.sale}>
-          <span>-20%</span>
-        </div>
-        {/* Product info */}
-        <div className={classes.product_info}>
-          <span>{name}</span>
-        </div>
-        <div className={classes.cost}>
-          <span>{cost}</span>
+    <div className="bg-white">
+      <div className="max-w-2xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8">
+        <div className="mt-8 grid grid-cols-1 gap-y-12 sm:grid-cols-2 sm:gap-x-6 lg:grid-cols-4 xl:gap-x-8">
+          {cardsData[0]?.map((card) => (
+            <Card key={card.id} card={card} />
+          ))}
         </div>
       </div>
-      {/* Add to cart */}
-      <button className={classes.add_to_cart}>Add to Cart</button>
     </div>
   );
 }

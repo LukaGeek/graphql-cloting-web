@@ -3,10 +3,9 @@
 import { useState } from "react";
 import classes from "./Header.module.css";
 import { GoChevronDown } from "react-icons/go";
-import { FaSignOutAlt } from "react-icons/fa";
-import { IoMdPersonAdd } from "react-icons/io";
+import SignInSession from "../SignInSession/SignInSession";
 
-export default function Header() {
+export default function Header(props) {
   const [activeDropdown, setActiveDropdown] = useState(null);
 
   const toggleDropdown = (dropdownName) => {
@@ -47,29 +46,8 @@ export default function Header() {
             <li>German</li>
           </ul>
         </li>
-        <li className={classes.accounts}>
-          <button onClick={() => toggleDropdown("accounts")}>
-            My Account
-            <GoChevronDown />
-          </button>
-          <ul
-            className={`${activeDropdown === "accounts" ? classes.open : ""}`}
-          >
-            <li>
-              <button>
-                <FaSignOutAlt />
-                Sign In
-              </button>
-            </li>
-            <li>
-              <button>
-                <IoMdPersonAdd />
-                Sign Up
-              </button>
-            </li>
-          </ul>
-        </li>
       </div>
+      <SignInSession />
     </div>
   );
 }

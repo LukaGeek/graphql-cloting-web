@@ -2,15 +2,18 @@ import Header from "./components/Header/Header";
 import Navbar from "./components/Navbar/Navbar";
 import Hero from "./components/Hero/Hero";
 import Cards from "./components/Cards/Cards";
-import NewProductCards from "./components/Products/NewProductCards";
 import DealOfTheWeek from "./components/DealOfTheWeek/DealOfTheWeek";
 import BestSellers from "./components/BestSellers/BestSellers";
 import ServiceInfo from "./components/ServiceInfo/ServiceInfo";
 import LatestBlogs from "./components/LatestBlogs/LatestBlogs";
 import Newsletter from "./components/Newsletter/Newsletter";
 import Footer from "./components/Footer/Footer";
-import { cardsData } from "./cardsData";
-import classes from "../page.module.css";
+import CardCarousel from "./components/Products/ProductsCarousel/Carousel";
+import Scrolling from "./components/Scrolling/ScrollingSystem";
+
+const options = { loop: false };
+const maxSlides = 5;
+const slides = Array.from(Array(maxSlides).keys());
 
 export default function Home() {
   return (
@@ -21,20 +24,12 @@ export default function Home() {
       <Cards />
       <DealOfTheWeek />
       <BestSellers />
-      <div className={classes.pageDiv}>
-        {cardsData[1].map((card, index) => (
-          <NewProductCards
-            key={index}
-            name={card.name}
-            cost={card.cost}
-            icon={card.icon}
-          />
-        ))}
-      </div>
+      <CardCarousel slides={slides} options={options} />
       <ServiceInfo />
       <LatestBlogs />
       <Newsletter />
       <Footer />
+      <Scrolling />
     </div>
   );
 }

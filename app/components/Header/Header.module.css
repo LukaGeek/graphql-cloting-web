@@ -1,9 +1,9 @@
 .mainDiv {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-evenly;
   height: 60px;
   background-color: #1e1e27;
-  padding: 0 200px;
+  padding: 0 70px;
   align-items: center;
 }
 
@@ -16,6 +16,7 @@
   display: flex;
   list-style: none;
   gap: 50px;
+  margin-left: 50%;
 }
 
 .leftDiv li {
@@ -65,13 +66,6 @@
   visibility: visible;
   opacity: 1;
   transform: translate(-50%, 10%);
-}
-
-.currency,
-.languages,
-.accounts {
-  display: flex;
-  align-items: center;
 }
 
 @media (min-width: 768px) {

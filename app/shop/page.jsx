@@ -1,87 +1,95 @@
-"use client"
+"use client";
 
-import { useState } from 'react'
+import { useState } from "react";
 import { MdFavoriteBorder } from "react-icons/md";
-import { Radio, RadioGroup } from '@headlessui/react'
-import Head from 'next/head';
+import { Radio, RadioGroup } from "@headlessui/react";
+import Head from "next/head";
+import Link from "next/link";
+import Image from "next/image";
 
 export const product = {
-  name: 'Basic Tee 6-Pack',
-  price: '$192',
-  href: '#',
+  name: "Basic Tee 6-Pack",
+  price: "$192",
+  href: "/",
   breadcrumbs: [
-    { id: 1, name: 'Men', href: '/shop/mens' },
-    { id: 2, name: 'Clothing', href: '/shop' },
+    { id: 1, name: "Home", href: "/" },
+    { id: 2, name: "Men", href: "/shop/mens" },
   ],
   images: [
     {
-      src: 'https://tailwindui.com/plus/img/ecommerce-images/product-page-02-secondary-product-shot.jpg',
-      alt: 'Two each of gray, white, and black shirts laying flat.',
+      src: "https://tailwindui.com/plus/img/ecommerce-images/product-page-02-secondary-product-shot.jpg",
+      alt: "Two each of gray, white, and black shirts laying flat.",
     },
     {
-      src: 'https://tailwindui.com/plus/img/ecommerce-images/product-page-02-tertiary-product-shot-01.jpg',
-      alt: 'Model wearing plain black basic tee.',
+      src: "https://tailwindui.com/plus/img/ecommerce-images/product-page-02-tertiary-product-shot-01.jpg",
+      alt: "Model wearing plain black basic tee.",
     },
     {
-      src: 'https://tailwindui.com/plus/img/ecommerce-images/product-page-02-tertiary-product-shot-02.jpg',
-      alt: 'Model wearing plain gray basic tee.',
+      src: "https://tailwindui.com/plus/img/ecommerce-images/product-page-02-tertiary-product-shot-02.jpg",
+      alt: "Model wearing plain gray basic tee.",
     },
     {
-      src: 'https://tailwindui.com/plus/img/ecommerce-images/product-page-02-featured-product-shot.jpg',
-      alt: 'Model wearing plain white basic tee.',
+      src: "https://tailwindui.com/plus/img/ecommerce-images/product-page-02-featured-product-shot.jpg",
+      alt: "Model wearing plain white basic tee.",
     },
   ],
   colors: [
-    { name: 'White', class: 'bg-white', selectedClass: 'ring-gray-400' },
-    { name: 'Gray', class: 'bg-gray-200', selectedClass: 'ring-gray-400' },
-    { name: 'Black', class: 'bg-gray-900', selectedClass: 'ring-gray-900' },
+    { name: "White", class: "bg-white", selectedClass: "ring-gray-400" },
+    { name: "Gray", class: "bg-gray-200", selectedClass: "ring-gray-400" },
+    { name: "Black", class: "bg-gray-900", selectedClass: "ring-gray-900" },
   ],
   sizes: [
-    { name: 'XXS', inStock: false },
-    { name: 'XS', inStock: true },
-    { name: 'S', inStock: true },
-    { name: 'M', inStock: true },
-    { name: 'L', inStock: true },
-    { name: 'XL', inStock: true },
-    { name: '2XL', inStock: true },
-    { name: '3XL', inStock: true },
+    { name: "XXS", inStock: false },
+    { name: "XS", inStock: true },
+    { name: "S", inStock: true },
+    { name: "M", inStock: true },
+    { name: "L", inStock: true },
+    { name: "XL", inStock: true },
+    { name: "2XL", inStock: true },
+    { name: "3XL", inStock: true },
   ],
   description:
     'The Basic Tee 6-Pack allows you to fully express your vibrant personality with three grayscale options. Feeling adventurous? Put on a heather gray tee. Want to be a trendsetter? Try our exclusive colorway: "Black". Need to add an extra pop of color to your outfit? Our white tee has you covered.',
   highlights: [
-    'Hand cut and sewn locally',
-    'Dyed with our proprietary colors',
-    'Pre-washed & pre-shrunk',
-    'Ultra-soft 100% cotton',
+    "Hand cut and sewn locally",
+    "Dyed with our proprietary colors",
+    "Pre-washed & pre-shrunk",
+    "Ultra-soft 100% cotton",
   ],
   details:
     'The 6-Pack includes two black, two white, and two heather gray Basic Tees. Sign up for our subscription service and be the first to get new, exciting colors, like our upcoming "Charcoal Gray" limited release.',
-}
+};
 
-const reviews = { href: '#', average: 4, totalCount: 117 }
+const reviews = { href: "/", average: 4, totalCount: 117 };
 
 function classNames(...classes) {
-  return classes.filter(Boolean).join(' ')
+  return classes.filter(Boolean).join(" ");
 }
 
 export default function Shop() {
-  const [selectedColor, setSelectedColor] = useState(product.colors[0])
-  const [selectedSize, setSelectedSize] = useState(product.sizes[2])
+  const [selectedColor, setSelectedColor] = useState(product.colors[0]);
+  const [selectedSize, setSelectedSize] = useState(product.sizes[2]);
 
   return (
     <div className="bg-white">
-    <Head>
+      <Head>
         <title>{product.name} - Shop</title>
       </Head>
       <div className="pt-6">
         <nav aria-label="Breadcrumb">
-          <ol role="list" className="mx-auto flex max-w-2xl items-center space-x-2 px-4 sm:px-6 lg:max-w-7xl lg:px-8">
+          <ol
+            role="list"
+            className="mx-auto flex max-w-2xl items-center space-x-2 px-4 sm:px-6 lg:max-w-7xl lg:px-8"
+          >
             {product.breadcrumbs.map((breadcrumb) => (
               <li key={breadcrumb.id}>
                 <div className="flex items-center">
-                  <a href={breadcrumb.href} className="mr-2 text-sm font-medium text-gray-900">
+                  <Link
+                    href={breadcrumb.href}
+                    className="mr-2 text-sm font-medium text-gray-900"
+                  >
                     {breadcrumb.name}
-                  </a>
+                  </Link>
                   <svg
                     fill="currentColor"
                     width={16}
@@ -96,51 +104,59 @@ export default function Shop() {
               </li>
             ))}
             <li className="text-sm">
-              <a href={product.href} aria-current="page" className="font-medium text-gray-500 hover:text-gray-600">
+              <Link
+                href={product.href}
+                aria-current="page"
+                className="font-medium text-gray-500 hover:text-gray-600"
+              >
                 {product.name}
-              </a>
+              </Link>
             </li>
           </ol>
         </nav>
-
-        {/* Image gallery */}
         <div className="mx-auto mt-6 max-w-2xl sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-3 lg:gap-x-8 lg:px-8">
-          <img
+          <Image
+            width={1000}
+            height={1000}
             alt={product.images[0].alt}
             src={product.images[0].src}
             className="hidden aspect-[3/4] size-full rounded-lg object-cover lg:block"
           />
           <div className="hidden lg:grid lg:grid-cols-1 lg:gap-y-8">
-            <img
+            <Image
+              width={1000}
+              height={1000}
               alt={product.images[1].alt}
               src={product.images[1].src}
               className="aspect-[3/2] size-full rounded-lg object-cover"
             />
-            <img
+            <Image
+              width={1000}
+              height={1000}
               alt={product.images[2].alt}
               src={product.images[2].src}
               className="aspect-[3/2] size-full rounded-lg object-cover"
             />
           </div>
-          <img
+          <Image
+            width={1000}
+            height={1000}
             alt={product.images[3].alt}
             src={product.images[3].src}
             className="aspect-[4/5] size-full object-cover sm:rounded-lg lg:aspect-[3/4]"
           />
         </div>
-
-        {/* Product info */}
         <div className="mx-auto max-w-2xl px-4 pb-16 pt-10 sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-3 lg:grid-rows-[auto,auto,1fr] lg:gap-x-8 lg:px-8 lg:pb-24 lg:pt-16">
           <div className="lg:col-span-2 lg:border-r lg:border-gray-200 lg:pr-8">
-            <h1 className="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">{product.name}</h1>
+            <h1 className="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">
+              {product.name}
+            </h1>
           </div>
-
-          {/* Options */}
           <div className="mt-4 lg:row-span-3 lg:mt-0">
             <h2 className="sr-only">Product information</h2>
-            <p className="text-3xl tracking-tight text-gray-900">{product.price}</p>
-
-            {/* Reviews */}
+            <p className="text-3xl tracking-tight text-gray-900">
+              {product.price}
+            </p>
             <div className="mt-6">
               <h3 className="sr-only">Reviews</h3>
               <div className="flex items-center">
@@ -150,26 +166,33 @@ export default function Shop() {
                       key={rating}
                       aria-hidden="true"
                       className={classNames(
-                        reviews.average > rating ? 'text-gray-900' : 'text-gray-200',
-                        'size-5 shrink-0',
+                        reviews.average > rating
+                          ? "text-gray-900"
+                          : "text-gray-200",
+                        "size-5 shrink-0"
                       )}
                     />
                   ))}
                 </div>
                 <p className="sr-only">{reviews.average} out of 5 stars</p>
-                <a href={reviews.href} className="ml-3 text-sm font-medium text-indigo-600 hover:text-indigo-500">
+                <a
+                  href={reviews.href}
+                  className="ml-3 text-sm font-medium text-indigo-600 hover:text-indigo-500"
+                >
                   {reviews.totalCount} reviews
                 </a>
               </div>
             </div>
 
             <form className="mt-10">
-              {/* Colors */}
               <div>
                 <h3 className="text-sm font-medium text-gray-900">Color</h3>
-
                 <fieldset aria-label="Choose a color" className="mt-4">
-                  <RadioGroup value={selectedColor} onChange={setSelectedColor} className="flex items-center space-x-3">
+                  <RadioGroup
+                    value={selectedColor}
+                    onChange={setSelectedColor}
+                    className="flex items-center space-x-3"
+                  >
                     {product.colors.map((color) => (
                       <Radio
                         key={color.name}
@@ -177,26 +200,30 @@ export default function Shop() {
                         aria-label={color.name}
                         className={classNames(
                           color.selectedClass,
-                          'relative -m-0.5 flex cursor-pointer items-center justify-center rounded-full p-0.5 focus:outline-none data-[checked]:ring-2 data-[focus]:data-[checked]:ring data-[focus]:data-[checked]:ring-offset-1',
+                          "relative -m-0.5 flex cursor-pointer items-center justify-center rounded-full p-0.5 focus:outline-none data-[checked]:ring-2 data-[focus]:data-[checked]:ring data-[focus]:data-[checked]:ring-offset-1"
                         )}
                       >
                         <span
                           aria-hidden="true"
-                          className={classNames(color.class, 'size-8 rounded-full border border-black/10')}
+                          className={classNames(
+                            color.class,
+                            "size-8 rounded-full border border-black/10"
+                          )}
                         />
                       </Radio>
                     ))}
                   </RadioGroup>
                 </fieldset>
               </div>
-
-              {/* Sizes */}
               <div className="mt-10">
                 <div className="flex items-center justify-between">
                   <h3 className="text-sm font-medium text-gray-900">Size</h3>
-                  <a href="#" className="text-sm font-medium text-indigo-600 hover:text-indigo-500">
+                  <Link
+                    href="#"
+                    className="text-sm font-medium text-indigo-600 hover:text-indigo-500"
+                  >
                     Size guide
-                  </a>
+                  </Link>
                 </div>
 
                 <fieldset aria-label="Choose a size" className="mt-4">
@@ -212,9 +239,9 @@ export default function Shop() {
                         disabled={!size.inStock}
                         className={classNames(
                           size.inStock
-                            ? 'cursor-pointer bg-white text-gray-900 shadow-sm'
-                            : 'cursor-not-allowed bg-gray-50 text-gray-200',
-                          'group relative flex items-center justify-center rounded-md border px-4 py-3 text-sm font-medium uppercase hover:bg-gray-50 focus:outline-none data-[focus]:ring-2 data-[focus]:ring-indigo-500 sm:flex-1 sm:py-6',
+                            ? "cursor-pointer bg-white text-gray-900 shadow-sm"
+                            : "cursor-not-allowed bg-gray-50 text-gray-200",
+                          "group relative flex items-center justify-center rounded-md border px-4 py-3 text-sm font-medium uppercase hover:bg-gray-50 focus:outline-none data-[focus]:ring-2 data-[focus]:ring-indigo-500 sm:flex-1 sm:py-6"
                         )}
                       >
                         <span>{size.name}</span>
@@ -234,7 +261,13 @@ export default function Shop() {
                               preserveAspectRatio="none"
                               className="absolute inset-0 size-full stroke-2 text-gray-200"
                             >
-                              <line x1={0} x2={100} y1={100} y2={0} vectorEffect="non-scaling-stroke" />
+                              <line
+                                x1={0}
+                                x2={100}
+                                y1={100}
+                                y2={0}
+                                vectorEffect="non-scaling-stroke"
+                              />
                             </svg>
                           </span>
                         )}
@@ -254,7 +287,6 @@ export default function Shop() {
           </div>
 
           <div className="py-10 lg:col-span-2 lg:col-start-1 lg:border-r lg:border-gray-200 lg:pb-16 lg:pr-8 lg:pt-6">
-            {/* Description and details */}
             <div>
               <h3 className="sr-only">Description</h3>
 
@@ -288,5 +320,5 @@ export default function Shop() {
         </div>
       </div>
     </div>
-  )
+  );
 }
