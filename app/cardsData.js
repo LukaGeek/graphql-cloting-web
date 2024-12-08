@@ -7,6 +7,7 @@ export const cardsData = [
       name: "Fujifilm X100T 16 MP Digital Camera (Silver)",
       color: "White",
       cost: "$520.00",
+      href: "/",
       path: "/",
     },
     {
@@ -109,5 +110,4 @@ export const cardsData = [
       path: "/",
     },
   ],
-  [],
 ];
