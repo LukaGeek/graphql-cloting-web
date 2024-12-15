@@ -35,12 +35,14 @@
   gap: 50px;
   margin-top: 50px;
   flex-wrap: wrap;
+  align-items: center;
 }
 
 .imageContainer {
   position: relative;
-  width: 350px;
-  height: 350px;
+  width: 100%;
+  max-width: 350px;
+  height: auto;
   overflow: hidden;
   transition: transform 0.3s ease;
 }
@@ -48,11 +50,11 @@
 .overlay {
   display: grid;
   position: absolute;
-  top: 37%;
+  top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   width: 80%;
-  height: 60%;
+  height: auto;
   background: rgba(255, 255, 255, 0.9);
   color: #282828;
   align-items: center;
@@ -98,8 +100,9 @@
   }
 
   .imageContainer {
-    width: 300px;
-    height: 300px;
+    width: 100%;
+    max-width: 300px;
+    height: auto;
   }
 }
 
@@ -109,8 +112,9 @@
   }
 
   .imageContainer {
-    width: 250px;
-    height: 250px;
+    width: 100%;
+    max-width: 250px;
+    height: auto;
   }
 
   .overlay {

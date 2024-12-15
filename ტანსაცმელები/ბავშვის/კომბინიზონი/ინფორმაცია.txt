@@ -1,0 +1,7 @@
+ბრენდი - Tommy Hilfiger
+სახელი - TOMMY SOLID SKISUIT
+ზომა - XS,S,M,L,XL
+ფასი - 200 ლარი
+ფერი - {
+   Black - #000000
+}

@@ -1,22 +1,24 @@
 .mainDiv {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-between;
+  align-items: center;
   height: 60px;
   background-color: #1e1e27;
-  padding: 0 70px;
-  align-items: center;
+  padding: 0 20px;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .plainText {
   text-transform: uppercase;
   color: #b5aec4;
+  font-size: 14px;
 }
 
 .leftDiv {
   display: flex;
   list-style: none;
-  gap: 50px;
-  margin-left: 50%;
+  gap: 20px;
 }
 
 .leftDiv li {
@@ -31,6 +33,7 @@
   color: #b5aec4;
   border: none;
   cursor: pointer;
+  font-size: 14px;
 }
 
 .leftDiv li ul {
@@ -68,9 +71,57 @@
   transform: translate(-50%, 10%);
 }
 
-@media (min-width: 768px) {
+@media (max-width: 1024px) {
   .mainDiv {
-    height: 45px;
-    width: 100%;
+    padding: 0 15px;
+  }
+
+  .plainText {
+    font-size: 12px;
+  }
+
+  .leftDiv {
+    gap: 15px;
+  }
+
+  .leftDiv li button {
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 768px) {
+  .mainDiv {
+    height: 50px;
+  }
+
+  .plainText {
+    font-size: 12px;
+  }
+
+  .leftDiv {
+    gap: 10px;
+  }
+
+  .leftDiv li button {
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .mainDiv {
+    height: 50px;
+    padding: 0 10px;
+  }
+
+  .plainText {
+    font-size: 10px;
+  }
+
+  .leftDiv {
+    gap: 10px;
+  }
+
+  .leftDiv li button {
+    font-size: 12px;
   }
 }

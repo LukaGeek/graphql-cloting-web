@@ -1,0 +1,7 @@
+ბრენდი - Calvin Klein
+სახელი - MODERN WOOL BLEND REGULAR BLAZER
+ზომა - XXL
+ფასი - 1000 ლარი
+ფერი - {
+   Black - #000000
+}

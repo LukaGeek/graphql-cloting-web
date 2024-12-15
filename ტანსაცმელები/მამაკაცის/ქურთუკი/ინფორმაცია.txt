@@ -1,0 +1,8 @@
+ბრენდი - Tommy Hilfiger
+სახელი - MIX DOWN HOODED PUFFER JACKET
+ზომა - S,M,L,XL,XXL
+ფასი - 500 ლარი
+ფერი - {
+   Black - #000000, 
+   Red - #ff0000
+}

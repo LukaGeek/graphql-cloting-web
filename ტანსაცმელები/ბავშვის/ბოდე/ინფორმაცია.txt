@@ -1,0 +1,7 @@
+ბრენდი - Tommy Hilfiger
+სახელი - MONOTYPE OVAL BODY LS
+ზომა - 4-6 თვე
+ფასი - 99 ლარი
+ფერი - {
+   flesh-colored - #f5cba7
+}

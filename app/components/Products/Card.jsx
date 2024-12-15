@@ -1,4 +1,3 @@
-// /components/Card.jsx
 import Image from "next/image";
 import Link from "next/link";
 
@@ -26,7 +25,9 @@ export default function Card({ card }) {
             aria-hidden="true"
             className="absolute inset-x-0 bottom-0 h-36 bg-gradient-to-t from-black opacity-50"
           />
-          <p className="relative text-lg font-semibold text-white">{card.cost}</p>
+          <p className="relative text-lg font-semibold text-white">
+            {card.cost}
+          </p>
         </div>
       </div>
     </Link>

@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
@@ -20,7 +20,9 @@ export default function DealOfTheWeek() {
     }
 
     const days = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
-    const hours = Math.floor((timeDiff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const hours = Math.floor(
+      (timeDiff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+    );
     const minutes = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60));
     const seconds = Math.floor((timeDiff % (1000 * 60)) / 1000);
 
@@ -51,9 +53,11 @@ export default function DealOfTheWeek() {
           alt="Deal Of The Week"
           width={600}
           height={800}
+          quality={100}
+          priority={false}
         />
       </div>
-      <div>
+      <div className={classes.content}>
         <h1 className={classes.text}>Deal Of The Week</h1>
         <div className={classes.circles}>
           <div className={`${classes.circle} ${classes.day}`}>
@@ -73,7 +77,9 @@ export default function DealOfTheWeek() {
             <span>Sec{timeRemaining.seconds !== 1 ? "s" : ""}</span>
           </div>
         </div>
-        <span className={classes.shop}><Link href="/shop">shop now</Link></span>
+        <span className={classes.shop}>
+          <Link href="/">shop now</Link>
+        </span>
       </div>
     </div>
   );

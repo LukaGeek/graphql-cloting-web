@@ -1,0 +1,13 @@
+ბრენდი - Calvin Klein
+სახელი - WOVEN LABEL RIB POLO LS DRESS
+ზომა - {
+   1-2თვე,
+   2-4თვე,
+   6-9თვე,
+   1-2წელი
+}
+ფასი - 200 ლარი
+ფერი - {
+   Black - #000000,
+   Pink - #ffc0cb
+}

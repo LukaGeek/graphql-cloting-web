@@ -1,0 +1,8 @@
+ბრენდი - Adidas
+სახელი - Adidas - TREFOIL TEE
+ზომა - 12-15 წლამდე
+ფასი - 119 ლარი
+ფერი - {
+   Black - #000000, 
+   White - #ffffff
+}

@@ -1,0 +1,7 @@
+ბრენდი - Lacoste
+სახელი - Quilted Plaid Overshirt
+ზომა - 2-4-6-8 წლის
+ფასი - 200 ლარი
+ფერი - {
+   Blue - #0000FF
+}

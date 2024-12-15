@@ -1,0 +1,7 @@
+ბრენდი - Adidas
+სახელი - Future Icons 3-Stripes Regular Pants
+ზომა - XS,S,M,L
+ფასი - 100 ლარი
+ფერი - {
+   White - #ffffff
+}

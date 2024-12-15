@@ -12,8 +12,8 @@ export default function CardCarousel({ options }) {
     useDotButton(emblaApi);
 
   const chunkedCards = [];
-  for (let i = 0; i < cardsData[0].length; i += 4) {
-    chunkedCards.push(cardsData[0].slice(i, i + 4));
+  for (let i = 0; i < cardsData.length; i += 4) {
+    chunkedCards.push(cardsData.slice(i, i + 4));
   }
 
   return (
