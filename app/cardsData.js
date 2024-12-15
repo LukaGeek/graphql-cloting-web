@@ -1,23 +1,27 @@
 export const cardsData = [
-  {
+  [{
+    /* For Men */
     id: 1,
-    icon: "/Products/1.webp",
+    type: "Jacket",
+    icon1: "/clothes/Men/Jacket/TommyHilfiger/Black/1.jpg",
+    icon2: "/clothes/Men/Jacket/TommyHilfiger/Black/2.jpg",
+    icon3: "/clothes/Men/Jacket/TommyHilfiger/Black/3.jpg",
+    icon4: "/clothes/Men/Jacket/TommyHilfiger/Red/1.jpg",
     alt: "",
-    name: "Fujifilm X100T 16 MP Digital Camera (Silver)",
+    brand: "Tommy Hilfiger",
+    name: "MIX DOWN HOODED PUFFER JACKET",
     colors: [
+      { name: "Black", class: "bg-black-900", selectedClass: "ring-black-200" },
       { name: "Red", class: "bg-red-900", selectedClass: "ring-red-200" },
     ],
     sizes: [
-      { name: "XXS", inStock: false },
-      { name: "XS", inStock: true },
-      { name: "S", inStock: false },
+      { name: "S", inStock: true },
       { name: "M", inStock: true },
-      { name: "L", inStock: false },
+      { name: "L", inStock: true },
       { name: "XL", inStock: true },
-      { name: "2XL", inStock: true },
-      { name: "3XL", inStock: true },
+      { name: "XXL", inStock: true },
     ],
-    reviews: [{ average: 2 }, { totalCount: 1 }],
+    reviews: [{ average: 3 }, { totalCount: 25 }],
     description:
       ' 1 The Basic Tee 6-Pack allows you to fully express your vibrant personality with three grayscale options. Feeling adventurous? Put on a heather gray tee. Want to be a trendsetter? Try our exclusive colorway: "Black". Need to add an extra pop of color to your outfit? Our white tee has you covered.',
     highlights: [
@@ -28,9 +32,53 @@ export const cardsData = [
     ],
     details:
       'The 6-Pack includes two black, two white, and two heather gray Basic Tees. Sign up for our subscription service and be the first to get new, exciting colors, like our upcoming "Charcoal Gray" limited release.',
-    cost: "$520",
+    cost: "$500",
     path: "/",
   },
+  {
+    id: 2,
+    type: "Jeans",
+    icon1: "/clothes/Men/Jeans/Levis/Black/1.jpg",
+    icon2: "/clothes/Men/Jeans/Levis/Blue/2.jpg",
+    icon3: "/clothes/Men/Jeans/Levis/DarkBlue/3.jpg",
+    icon4: "/clothes/Men/Jeans/Levis/SkyBlue/4.jpg",
+    alt: "",
+    brand: "Levis",
+    name: "Relaxed Straight",
+    colors: [
+      { name: "Black", class: "bg-black-900", selectedClass: "ring-black-200" },
+      { name: "Blue", class: "bg-blue-950", selectedClass: "ring-blue-950" },
+      { name: "Dark Blue", class: "bg-red-900", selectedClass: "ring-blue-950" },
+      { name: "Sky Blue", class: "bg-black-900", selectedClass: "ring-blue-500" },
+    ],
+    sizes: [
+      { name: "29", inStock: true },
+      { name: "30", inStock: true },
+      { name: "31", inStock: true },
+      { name: "32", inStock: true },
+      { name: "33", inStock: true },
+      { name: "34", inStock: true },
+      { name: "36", inStock: true },
+      { name: "38", inStock: true },
+      { name: "40", inStock: true },
+    ],
+    reviews: [{ average: 3 }, { totalCount: 25 }],
+    description:
+      ' 1 The Basic Tee 6-Pack allows you to fully express your vibrant personality with three grayscale options. Feeling adventurous? Put on a heather gray tee. Want to be a trendsetter? Try our exclusive colorway: "Black". Need to add an extra pop of color to your outfit? Our white tee has you covered.',
+    highlights: [
+      " 1 Hand cut and sewn locally",
+      "Dyed with our proprietary colors",
+      "Pre-washed & pre-shrunk",
+      "Ultra-soft 100% cotton",
+    ],
+    details:
+      'The 6-Pack includes two black, two white, and two heather gray Basic Tees. Sign up for our subscription service and be the first to get new, exciting colors, like our upcoming "Charcoal Gray" limited release.',
+    cost: "$300",
+    path: "/",
+  },],
+  [],
+  []
+  
   {
     id: 2,
     icon: "/Products/2.webp",

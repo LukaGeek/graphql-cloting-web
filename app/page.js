@@ -3,7 +3,6 @@ import Navbar from "./components/Navbar/Navbar";
 import Hero from "./components/Hero/Hero";
 import Cards from "./components/Cards/Cards";
 import DealOfTheWeek from "./components/DealOfTheWeek/DealOfTheWeek";
-import BestSellers from "./components/BestSellers/BestSellers";
 import ServiceInfo from "./components/ServiceInfo/ServiceInfo";
 import LatestBlogs from "./components/LatestBlogs/LatestBlogs";
 import Newsletter from "./components/Newsletter/Newsletter";
@@ -23,7 +22,6 @@ export default function Home() {
       <Hero />
       <Cards />
       <DealOfTheWeek />
-      <BestSellers />
       <CardCarousel slides={slides} options={options} />
       <ServiceInfo />
       <LatestBlogs />
