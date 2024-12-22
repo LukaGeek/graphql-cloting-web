@@ -12,11 +12,11 @@ const getProducts = async () => {
     }
 
     const data = await res.json();
-    console.log(data); // Log the response to ensure data is correct
+    console.log(data);
     return data;
   } catch (error) {
     console.log("Error loading products: ", error);
-    return { products: [] }; // Return an empty array if error occurs
+    return { products: [] };
   }
 };
 

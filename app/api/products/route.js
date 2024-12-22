@@ -13,10 +13,22 @@ export async function POST(req) {
     { status: 201 }
   );
 }
-
 export async function GET() {
-  await connectMongoDB();
-  const products = await ProductModel.find();
+  try {
+    const client = await connectMongoDB();
+    const db = client.db("nextjsdb");
+    const productsCollection = db.collection("products");
 
-  return NextResponse.json({ products });
+    const products = await productsCollection.find().toArray();
+
+    client.close();
+
+    return NextResponse.json({ products });
+  } catch (error) {
+    console.error(error);
+    return NextResponse.json(
+      { message: "Failed to fetch products" },
+      { status: 500 }
+    );
+  }
 }
