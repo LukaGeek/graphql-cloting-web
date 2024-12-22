@@ -1,11 +1,11 @@
-import classes from "./Mens.module.css";
+import classes from "../Gender.module.css";
 
-export default function BestSellers() {
+export default function Women() {
   return (
     <div>
       <div>
         <div className={classes.mainDiv}>
-          <div className={classes.word}>Mens</div>
+          <div className={classes.word}>Women</div>
           <span className={classes.divider}></span>
         </div>
       </div>

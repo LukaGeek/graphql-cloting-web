@@ -82,7 +82,7 @@ export default function ProductOverview({ params }) {
             width={1000}
             height={1000}
             alt={products.alt}
-            src={products.icon}
+            src={products.icon1}
             quality={100}
             priority={true}
             className="hidden aspect-[3/4] size-full rounded-lg object-cover lg:block"
@@ -92,7 +92,7 @@ export default function ProductOverview({ params }) {
               width={1000}
               height={1000}
               alt={products.alt}
-              src={products.icon}
+              src={products.icon2}
               quality={100}
               priority={true}
               className="aspect-[3/2] size-full rounded-lg object-cover"
@@ -101,7 +101,7 @@ export default function ProductOverview({ params }) {
               width={1000}
               height={1000}
               alt={products.alt}
-              src={products.icon}
+              src={products.icon3}
               quality={100}
               priority={true}
               className="aspect-[3/2] size-full rounded-lg object-cover"
@@ -111,7 +111,7 @@ export default function ProductOverview({ params }) {
             width={1000}
             height={1000}
             alt={products.alt}
-            src={products.icon}
+            src={products.icon4}
             quality={100}
             priority={true}
             className="aspect-[4/5] size-full object-cover sm:rounded-lg lg:aspect-[3/4]"

@@ -3,6 +3,7 @@ import "./globals.css";
 import { SessionProvider } from "next-auth/react";
 import { auth } from "@/auth";
 import Scrolling from "./components/Scrolling/ScrollingSystem";
+import AdminPageMain from "./components/AdminPage/AdminPage";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -29,7 +30,10 @@ export default async function RootLayout({ children }) {
         <body
           className={`${geistSans.variable} ${geistMono.variable} antialiased`}
         >
-          {children}
+          <div>
+            <AdminPageMain />
+          </div>
+          <div>{children}</div>
           <Scrolling />
         </body>
       </html>
