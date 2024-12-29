@@ -4,8 +4,9 @@ import { useState } from "react";
 import classes from "./Header.module.css";
 import { GoChevronDown } from "react-icons/go";
 import SignInSession from "../SignInSession/SignInSession";
+import Dashboard from "../Dashboard/Dashboard";
 
-export default function Header(props) {
+export default function Header() {
   const [activeDropdown, setActiveDropdown] = useState(null);
 
   const toggleDropdown = (dropdownName) => {
@@ -47,6 +48,7 @@ export default function Header(props) {
           </ul>
         </li>
       </div>
+      <Dashboard />
       <SignInSession />
     </div>
   );

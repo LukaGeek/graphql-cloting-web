@@ -1,4 +1,4 @@
-import { MongoClient } from "mongodb";
+import { MongoClient, ObjectId } from "mongodb";
 
 const connectMongoDB = async () => {
   try {
@@ -7,10 +7,10 @@ const connectMongoDB = async () => {
       useUnifiedTopology: true,
     });
     await client.connect();
-    console.log("Connected to MongoDB.");
     return client;
   } catch (error) {
-    console.log(error);
+    console.error("MongoDB connection error:", error);
+    throw new Error("Failed to connect to MongoDB");
   }
 };
 
@@ -26,8 +26,59 @@ const ProductModel = {
       updatedAt: new Date(),
     });
 
-    console.log("Product Created:", result);
     client.close();
+    return result;
+  },
+
+  updateById: async (id, updateData) => {
+    const client = await connectMongoDB();
+    const db = client.db("nextjsdb");
+    const productsCollection = db.collection("products");
+
+    const result = await productsCollection.updateOne(
+      { _id: new ObjectId(id) },
+      {
+        $set: {
+          ...updateData,
+          updatedAt: new Date(),
+        },
+      }
+    );
+
+    client.close();
+    return result;
+  },
+
+  findAll: async () => {
+    const client = await connectMongoDB();
+    const db = client.db("nextjsdb");
+    const productsCollection = db.collection("products");
+
+    const products = await productsCollection.find().toArray();
+    client.close();
+    return products;
+  },
+
+  findById: async (id) => {
+    const client = await connectMongoDB();
+    const db = client.db("nextjsdb");
+    const productsCollection = db.collection("products");
+
+    const product = await productsCollection.findOne({ _id: new ObjectId(id) });
+    client.close();
+    return product;
+  },
+
+  deleteById: async (id) => {
+    const client = await connectMongoDB();
+    const db = client.db("nextjsdb");
+    const productsCollection = db.collection("products");
+
+    const result = await productsCollection.deleteOne({
+      _id: new ObjectId(id),
+    });
+    client.close();
+    return result;
   },
 };
 

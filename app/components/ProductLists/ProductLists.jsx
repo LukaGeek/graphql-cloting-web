@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import RemoveBtn from "../RemoveBtn";
 
 const getProducts = async () => {
   try {
@@ -26,9 +27,7 @@ export default async function ProductLists() {
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div className="flex justify-between items-center py-10">
-        <h1 className="text-2xl font-bold">
-          Here are some products for CRUD action
-        </h1>
+        <h1 className="text-2xl font-bold">Listed Products:</h1>
         <Link
           href="/addProduct"
           className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
@@ -44,12 +43,7 @@ export default async function ProductLists() {
               <table className="min-w-full divide-y divide-gray-200">
                 <thead className="bg-gray-50">
                   <tr>
-                    <th className="px-6 py-3 text-left">
-                      <input
-                        type="checkbox"
-                        className="h-4 w-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500"
-                      />
-                    </th>
+                    {/* Removed checkbox column */}
                     <th
                       scope="col"
                       className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
@@ -83,7 +77,7 @@ export default async function ProductLists() {
                   {products.length === 0 ? (
                     <tr>
                       <td
-                        colSpan="6"
+                        colSpan="5"
                         className="text-center py-4 text-gray-500"
                       >
                         No products available
@@ -92,12 +86,6 @@ export default async function ProductLists() {
                   ) : (
                     products.map((product) => (
                       <tr key={product._id}>
-                        <td className="px-6 py-4 whitespace-nowrap text-left">
-                          <input
-                            type="checkbox"
-                            className="h-4 w-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500"
-                          />
-                        </td>
                         <td className="px-6 py-4 whitespace-nowrap text-left">
                           <Image
                             src={product.image}
@@ -123,6 +111,7 @@ export default async function ProductLists() {
                           >
                             <button className="btn btn-primary">Edit</button>
                           </Link>
+                          <RemoveBtn id={product._id} />
                         </td>
                       </tr>
                     ))
