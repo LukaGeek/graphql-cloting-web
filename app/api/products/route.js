@@ -4,9 +4,31 @@ const { default: connectMongoDB } = require("@/lib/mongodb");
 const { default: ProductModel } = require("@/models/ProductModel");
 
 export async function POST(req) {
-  const { name, image, price, category } = await req.json();
+  const {
+    name,
+    image1,
+    image2,
+    image3,
+    image4,
+    price,
+    type,
+    brand,
+    description,
+    details,
+  } = await req.json();
   await connectMongoDB;
-  await ProductModel.create({ name, image, price, category });
+  await ProductModel.create({
+    name,
+    image1,
+    image2,
+    image3,
+    image4,
+    price,
+    type,
+    brand,
+    description,
+    details,
+  });
 
   return NextResponse.json(
     { message: "Product Successfully Created" },

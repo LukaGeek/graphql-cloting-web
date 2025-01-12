@@ -4,6 +4,7 @@ import { Menu, Popover } from "@headlessui/react";
 import { SearchIcon } from "@heroicons/react/solid";
 import { BellIcon, MenuIcon, XIcon } from "@heroicons/react/outline";
 import Image from "next/image";
+import Link from "next/link";
 
 const user = {
   name: "Chelsea Hagon",
@@ -33,12 +34,12 @@ export default function AdminPageMain({ children }) {
               <div className="relative flex justify-between xl:grid xl:grid-cols-12 lg:gap-8">
                 <div className="flex md:absolute md:left-0 md:inset-y-0 lg:static xl:col-span-2">
                   <div className="flex-shrink-0 flex items-center">
-                    <a href="#">
+                    <a href="/admin">
                       <Image
                         className="block h-8 w-auto"
                         width={50}
                         height={50}
-                        src="/Banners/1.webp"
+                        src="/Admin/panel.png"
                         alt="Workflow"
                       />
                     </a>
@@ -82,9 +83,14 @@ export default function AdminPageMain({ children }) {
                 <div className="hidden lg:flex lg:items-center lg:justify-end xl:col-span-4">
                   {/* Profile dropdown */}
                   <Menu as="div" className="flex-shrink-0 relative ml-5">
-                    <div>
+                    <div className="flex flex-row items-center">
+                      <button
+                        type="submit"
+                        className="bg-indigo-600 text-white text-sm font-medium py-2 px-2 rounded-md shadow hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 mr-4"
+                      >
+                        <Link href="/">Back to Main Page</Link>
+                      </button>
                       <Menu.Button className="bg-white rounded-full flex">
-                        <span className="sr-only">Open user menu</span>
                         <Image
                           className="h-8 w-8 rounded-full"
                           width={50}

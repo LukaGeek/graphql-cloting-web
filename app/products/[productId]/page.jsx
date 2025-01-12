@@ -1,11 +1,10 @@
 "use client";
 
-import { useState } from "react";
 import { MdStar } from "react-icons/md";
 import { Radio, RadioGroup } from "@headlessui/react";
 import Link from "next/link";
 import Image from "next/image";
-import { cardsData } from "../../cardsData";
+import { useEffect, useState } from "react";
 
 const productPath = [{ id: 1, name: "Home", path: "/" }];
 
@@ -14,19 +13,40 @@ function classNames(...classes) {
 }
 
 export default function ProductOverview({ params }) {
-  const query = params.productId;
-  const products = cardsData.flat().find((card) => String(card.id) === query);
-  const productAverage = products.reviews.flat().find((aver) => aver.average);
-  const productCount = products.reviews
-    .flat()
-    .find((total) => total.totalCount);
-  const reviewsAverage = productAverage.average;
-  const reviewsCount = productCount.totalCount;
+  const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-  const [selectedColor, setSelectedColor] = useState("");
-  const [selectedSize, setSelectedSize] = useState("");
-  console.log(selectedColor);
-  console.log(selectedSize);
+  const query = params.productId;
+  console.log(query);
+
+  const dbProduct = products.find((card) => card._id === query);
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const res = await fetch("http://localhost:3000/api/products", {
+          cache: "no-store",
+        });
+
+        if (!res.ok) {
+          throw new Error("Failed to fetch products");
+        }
+
+        const data = await res.json();
+        setProducts(data.products);
+      } catch (error) {
+        console.error("Error loading products:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchProducts();
+  }, []);
+
+  if (loading) {
+    return <div>Loading products...</div>;
+  }
 
   if (!query) {
     return <p>Products Loading...</p>;
@@ -66,92 +86,93 @@ export default function ProductOverview({ params }) {
                 </div>
               </li>
             ))}
-            <li className="text-sm">
-              <Link
-                href={products.path}
-                aria-current="page"
-                className="font-medium text-gray-500 hover:text-gray-600"
-              >
-                {products.name}
-              </Link>
-            </li>
+            <div key={dbProduct._id}>
+              <li className="text-sm">
+                <div className="font-medium text-gray-500 hover:text-gray-600">
+                  {dbProduct.name} (productId: {dbProduct._id})
+                </div>
+              </li>
+            </div>
           </ol>
         </nav>
-        <div className="mx-auto mt-6 max-w-2xl sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-3 lg:gap-x-8 lg:px-8">
-          <Image
-            width={1000}
-            height={1000}
-            alt={products.alt}
-            src={products.icon1}
-            quality={100}
-            priority={true}
-            className="hidden aspect-[3/4] size-full rounded-lg object-cover lg:block"
-          />
-          <div className="hidden lg:grid lg:grid-cols-1 lg:gap-y-8">
+        {dbProduct && (
+          <div className="mx-auto mt-6 max-w-2xl sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-3 lg:gap-x-8 lg:px-8">
             <Image
               width={1000}
               height={1000}
-              alt={products.alt}
-              src={products.icon2}
+              alt=""
+              src={dbProduct.image1}
               quality={100}
               priority={true}
-              className="aspect-[3/2] size-full rounded-lg object-cover"
+              className="hidden aspect-[3/4] size-full rounded-lg object-cover lg:block"
             />
+            <div className="hidden lg:grid lg:grid-cols-1 lg:gap-y-8">
+              <Image
+                width={1000}
+                height={1000}
+                alt=""
+                src={dbProduct.image2}
+                quality={100}
+                priority={true}
+                className="aspect-[3/2] size-full rounded-lg object-cover"
+              />
+              <Image
+                width={1000}
+                height={1000}
+                alt=""
+                src={dbProduct.image3}
+                quality={100}
+                priority={true}
+                className="aspect-[3/2] size-full rounded-lg object-cover"
+              />
+            </div>
             <Image
               width={1000}
               height={1000}
-              alt={products.alt}
-              src={products.icon3}
+              alt=""
+              src={dbProduct.image4}
               quality={100}
               priority={true}
-              className="aspect-[3/2] size-full rounded-lg object-cover"
+              className="aspect-[4/5] size-full object-cover sm:rounded-lg lg:aspect-[3/4]"
             />
           </div>
-          <Image
-            width={1000}
-            height={1000}
-            alt={products.alt}
-            src={products.icon4}
-            quality={100}
-            priority={true}
-            className="aspect-[4/5] size-full object-cover sm:rounded-lg lg:aspect-[3/4]"
-          />
-        </div>
+        )}
+
         <div className="mx-auto max-w-2xl px-4 pb-16 pt-10 sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-3 lg:grid-rows-[auto,auto,1fr] lg:gap-x-8 lg:px-8 lg:pb-24 lg:pt-16">
           <div className="lg:col-span-2 lg:border-r lg:border-gray-200 lg:pr-8">
             <h1 className="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">
-              {products.name}
+              {dbProduct.name}
             </h1>
           </div>
           <div className="mt-4 lg:row-span-3 lg:mt-0">
             <h2 className="sr-only">Product information</h2>
             <p className="text-3xl tracking-tight text-gray-900">
-              {products.cost}
+              {dbProduct.price}$
             </p>
             <div className="mt-6">
               <h3 className="sr-only">Reviews</h3>
               <div className="flex items-center">
                 <div className="flex items-center">
-                  {[0, 1, 2, 3, 4].map((rating) => (
+                  {/* {[0, 1, 2, 3, 4].map((rating) => (
                     <MdStar
-                      key={rating}
+                      key={"rating"}
                       aria-hidden="true"
                       className={classNames(
-                        reviewsAverage > rating
+                        "reviewsAverage" > "rating"
                           ? "text-gray-900"
                           : "text-gray-200",
                         "size-5 shrink-0"
                       )}
                     />
-                  ))}
+                  ))} */}
                 </div>
-                <p className="sr-only">{reviewsAverage} out of 5 stars</p>
-                <a
-                  href={products.path}
+                <p className="sr-only">{"reviewsAverage"} out of 5 stars</p>
+                <Link
+                  href="/"
                   className="ml-3 text-sm font-medium text-indigo-600 hover:text-indigo-500"
                 >
-                  {reviewsCount} reviews
-                </a>
+                  {"reviewsCount"} reviews
+                </Link>
               </div>
             </div>
 
@@ -160,11 +181,11 @@ export default function ProductOverview({ params }) {
                 <h3 className="text-sm font-medium text-gray-900">Color</h3>
                 <fieldset aria-label="Choose a color" className="mt-4">
                   <RadioGroup
-                    value={selectedColor}
-                    onChange={setSelectedColor}
+                    value={"selectedColor"}
+                    onChange={"setSelectedColor"}
                     className="flex items-center space-x-3"
                   >
-                    {products.colors.map((color) => (
+                    {/* {products.colors.map((color) => (
                       <Radio
                         key={color.name}
                         value={color}
@@ -182,7 +203,7 @@ export default function ProductOverview({ params }) {
                           )}
                         />
                       </Radio>
-                    ))}
+                    ))} */}
                   </RadioGroup>
                 </fieldset>
               </div>
@@ -199,11 +220,11 @@ export default function ProductOverview({ params }) {
 
                 <fieldset aria-label="Choose a size" className="mt-4">
                   <RadioGroup
-                    value={selectedSize}
-                    onChange={setSelectedSize}
+                    value={"selectedSize"}
+                    onChange={"setSelectedSize"}
                     className="grid grid-cols-4 gap-4 sm:grid-cols-8 lg:grid-cols-4"
                   >
-                    {products.sizes.map((size) => (
+                    {/* {products.sizes.map((size) => (
                       <RadioGroup.Option
                         key={size.name}
                         value={size}
@@ -258,7 +279,7 @@ export default function ProductOverview({ params }) {
                           </>
                         )}
                       </RadioGroup.Option>
-                    ))}
+                    ))} */}
                   </RadioGroup>
                 </fieldset>
               </div>
@@ -284,15 +305,15 @@ export default function ProductOverview({ params }) {
             </div>
 
             <div className="mt-10">
-              <h3 className="text-sm font-medium text-gray-900">Highlights</h3>
+              <h3 className="text-sm font-medium text-gray-900">Description</h3>
 
               <div className="mt-4">
                 <ul role="list" className="list-disc space-y-2 pl-4 text-sm">
-                  {products.highlights.map((highlight) => (
-                    <li key={highlight} className="text-gray-400">
-                      <span className="text-gray-600">{highlight}</span>
-                    </li>
-                  ))}
+                  <li key={dbProduct.description} className="text-gray-400">
+                    <span className="text-gray-600">
+                      {dbProduct.description}
+                    </span>
+                  </li>
                 </ul>
               </div>
             </div>
@@ -301,7 +322,7 @@ export default function ProductOverview({ params }) {
               <h2 className="text-sm font-medium text-gray-900">Details</h2>
 
               <div className="mt-4 space-y-6">
-                <p className="text-sm text-gray-600">{products.details}</p>
+                <p className="text-sm text-gray-600">{dbProduct.details}</p>
               </div>
             </div>
           </div>

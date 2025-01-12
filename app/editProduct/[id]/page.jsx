@@ -22,15 +22,32 @@ export default async function EditProduct({ params }) {
 
   try {
     const { product } = await getProductById(id);
-    const { name, image, price, category } = product;
+    const {
+      name,
+      image1,
+      image2,
+      image3,
+      image4,
+      price,
+      type,
+      brand,
+      description,
+      details,
+    } = product;
 
     return (
       <EditProductForm
         id={id}
         name={name}
-        image={image}
+        image1={image1}
+        image2={image2}
+        image3={image3}
+        image4={image4}
         price={price}
-        category={category}
+        type={type}
+        brand={brand}
+        description={description}
+        details={details}
       />
     );
   } catch (error) {

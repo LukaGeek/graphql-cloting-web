@@ -8,9 +8,8 @@ export const cardsData = [
       icon2: "/clothes/Men/Jacket/TommyHilfiger/Black/2.jpg",
       icon3: "/clothes/Men/Jacket/TommyHilfiger/Black/3.jpg",
       icon4: "/clothes/Men/Jacket/TommyHilfiger/Red/1.jpg",
-      alt: "",
       brand: "Tommy Hilfiger",
-      name: "MIX DOWN HOODED PUFFER JACKET",
+      name: "",
       colors: [
         {
           name: "Black",
