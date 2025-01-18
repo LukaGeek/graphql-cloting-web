@@ -5,13 +5,14 @@ export async function PUT(request, { params }) {
   const { id } = params;
   const {
     newName: name,
+    newPrice: price,
+    newColor: color,
+    newType: type,
+    newBrand: brand,
     newImage1: image1,
     newImage2: image2,
     newImage3: image3,
     newImage4: image4,
-    newPrice: price,
-    newType: type,
-    newBrand: brand,
     newDescription: description,
     newDetails: details,
   } = await request.json();
@@ -19,13 +20,14 @@ export async function PUT(request, { params }) {
   try {
     const updateResult = await ProductModel.updateById(id, {
       name,
+      price,
+      color,
+      type,
+      brand,
       image1,
       image2,
       image3,
       image4,
-      price,
-      type,
-      brand,
       description,
       details,
     });

@@ -5,7 +5,7 @@ export default function AdminHomePage() {
   return (
     <div>
       <AdminPageMain>
-        <ProductLists />;
+        <ProductLists />
       </AdminPageMain>
     </div>
   );

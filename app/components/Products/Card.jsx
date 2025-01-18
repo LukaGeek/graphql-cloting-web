@@ -65,10 +65,10 @@ export default function Card() {
                 {card.brand}
               </div>
               <div className="mt-1 text-sm text-gray-500">
-                {card.colors?.map((color, index) => (
+                {card.color?.map((color, index) => (
                   <span key={index} className="mr-2">
-                    {color.name}
-                    {index < card.colors.length - 1 ? "," : ""}
+                    {color}
+                    {index < card.color.length - 1 ? "," : ""}
                   </span>
                 )) || <span>No colors available</span>}
               </div>

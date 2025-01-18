@@ -6,29 +6,35 @@ const { default: ProductModel } = require("@/models/ProductModel");
 export async function POST(req) {
   const {
     name,
+    price,
+    color,
+    type,
+    brand,
     image1,
     image2,
     image3,
     image4,
-    price,
-    type,
-    brand,
     description,
     details,
   } = await req.json();
   await connectMongoDB;
   await ProductModel.create({
     name,
+    price,
+    color,
+    type,
+    brand,
     image1,
     image2,
     image3,
     image4,
-    price,
-    type,
-    brand,
     description,
     details,
   });
+
+  if (!Array.isArray(color)) {
+    return res.status(400).json({ message: "'color' must be an array" });
+  }
 
   return NextResponse.json(
     { message: "Product Successfully Created" },
