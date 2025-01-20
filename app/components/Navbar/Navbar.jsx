@@ -2,8 +2,6 @@ import classes from "./Navbar.module.css";
 import { IoSearchSharp } from "react-icons/io5";
 import { FaUser } from "react-icons/fa";
 import { FaCartShopping } from "react-icons/fa6";
-import Link from "next/link"
-import UserDropdown from "../Dropdown/Dropdown";
 
 export default function Navbar() {
   return (
@@ -17,9 +15,7 @@ export default function Navbar() {
         <div>shop</div>
         <div>promotion</div>
         <div>pages</div>
-        <div>
-          <Link href="/admin">dashboard</Link>
-        </div>
+        <div>blog</div>
         <div>contact</div>
         <div className={classes.iconsDiv}>
           <div className={classes.icons}>
@@ -29,10 +25,7 @@ export default function Navbar() {
             <FaCartShopping />
           </div>
           <div className={classes.icons}>
-            <Link href="/login">
-                <FaUser />
-                <UserDropdown />
-              </Link>
+            <FaUser />
           </div>
         </div>
       </div>

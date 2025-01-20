@@ -4,6 +4,7 @@ import { useState } from "react";
 import classes from "./Header.module.css";
 import { GoChevronDown } from "react-icons/go";
 import SignInSession from "../SignInSession/SignInSession";
+import Dashboard from "../Dashboard/Dashboard";
 
 export default function Header() {
   const [activeDropdown, setActiveDropdown] = useState(null);
@@ -47,6 +48,8 @@ export default function Header() {
           </ul>
         </li>
       </div>
+      <Dashboard />
+      <SignInSession />
     </div>
   );
 }
