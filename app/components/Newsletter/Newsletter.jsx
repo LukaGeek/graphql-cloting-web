@@ -1,12 +1,13 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
+import emailjs from "emailjs-com";
 import classes from "./Newsletter.module.css";
 
 export default function Newsletter() {
-  let [message, setMessage] = useState("");
-  let [isSent, setIsSent] = useState(false);
-  let [isValidEmail, setIsValidEmail] = useState(true);
+  const [email, setEmail] = useState("");
+  const [isValidEmail, setIsValidEmail] = useState(true);
+  const [isSent, setIsSent] = useState(false);
 
   useEffect(() => {
     if (isSent) {
@@ -16,50 +17,54 @@ export default function Newsletter() {
   }, [isSent]);
 
   const handleEmailChange = (e) => {
-    const email = e.target.value;
-    setMessage(email);
+    const value = e.target.value;
+    setEmail(value);
 
-    // Simple regex for email validation
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    setIsValidEmail(emailRegex.test(email));
+    setIsValidEmail(emailRegex.test(value));
   };
 
   const handleSubscribe = (e) => {
     e.preventDefault();
-    if (isValidEmail && message) {
-      setIsSent(true);
-      setMessage(""); // Clear the input after successful submission
-    }
+    if (!isValidEmail || !email) return;
+
+    emailjs
+      .send(
+        "email_subscribe",
+        "template_f22bzp9",
+        { user_email: email },
+        "XduKCPx0262nZVRAz"
+      )
+      .then(
+        () => {
+          setIsSent(true);
+          setEmail("");
+        },
+        (error) => {
+          console.error("Failed to send email:", error);
+        }
+      );
   };
 
   return (
     <div>
       <div className={classes.mainDiv}>
         <div className={classes.firstDiv}>
-          <h1>Newsletter</h1>
-          <span>
-            Subscribe to our newsletter and get 20% off your first purchase
-          </span>
+          <h1></h1>
+          <span></span>
         </div>
         <div className={classes.secondDiv}>
           <input
             type="email"
             placeholder="Your Email"
-            value={message}
+            value={email}
             onChange={handleEmailChange}
           />
-          <button
-            onClick={handleSubscribe}
-            disabled={!isValidEmail || !message}
-          >
-            subscribe
+          <button onClick={handleSubscribe} disabled={!isValidEmail || !email}>
+            Subscribe
           </button>
         </div>
-        {!isValidEmail && (
-          <div className={classes.error}>
-            Please enter a valid email address.
-          </div>
-        )}
+        {!isValidEmail && <div className={classes.error}></div>}
       </div>
       {isSent && (
         <div

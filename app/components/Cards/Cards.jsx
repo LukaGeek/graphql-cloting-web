@@ -7,21 +7,39 @@ export default function Cards() {
     <div>
       <div className={classes.mainDiv}>
         <div className={classes.image1}>
-          <Image src="/Banners/1.webp" alt="first" width={350} height={350} />
+          <Image
+            src="/Banners/1.webp"
+            alt="first"
+            width={350}
+            height={350}
+            draggable="false"
+          />
           <h1 className={classes.text1}>
-            <Link href="/shop/womens">women&apos;s</Link>
+            <Link href="/shop/women"></Link>
           </h1>
         </div>
         <div className={classes.image2}>
-          <Image src="/Banners/2.webp" alt="second" width={350} height={350} />
+          <Image
+            src="/Banners/2.webp"
+            alt="second"
+            width={350}
+            height={350}
+            draggable="false"
+          />
           <h1 className={classes.text2}>
-            <Link href="/shop/accessories">accessories</Link>
+            <Link href="/shop/kids"></Link>
           </h1>
         </div>
         <div className={classes.image3}>
-          <Image src="/Banners/3.webp" alt="third" width={350} height={350} />
+          <Image
+            src="/Banners/3.webp"
+            alt="third"
+            width={350}
+            height={350}
+            draggable="false"
+          />
           <h1 className={classes.text3}>
-            <Link href="/shop/mens">men&apos;s</Link>
+            <Link href="/shop/men"></Link>
           </h1>
         </div>
       </div>

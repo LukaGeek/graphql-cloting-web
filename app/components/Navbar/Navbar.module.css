@@ -5,50 +5,64 @@
   justify-content: space-between;
   width: 100%;
   padding: 10px;
-  height: auto;
   background-color: white;
   border-bottom: 1px solid rgb(202, 197, 197);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 .logo {
   text-transform: uppercase;
-  font-size: 20px;
+  font-size: 24px;
   font-weight: bold;
+  color: #333;
   margin: 10px 0;
+  display: flex;
+  align-items: center;
 }
 
-.red {
-  color: red;
+.logo span:nth-child(1):after {
+  content: "COLO";
 }
-.logo:hover {
-  cursor: pointer;
+
+.logo span:nth-child(2):after {
+  content: "SHOP";
+  color: red;
 }
 
 .nav {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 20px;
-  font-size: 12px;
+  gap: 25px;
+  font-size: 14px;
   text-transform: uppercase;
   font-weight: bold;
+  color: #555;
   cursor: pointer;
 }
 
 .nav div {
-  transition: 0.3s;
+  position: relative;
+  transition: color 0.3s, transform 0.3s;
 }
 
-.nav div:nth-child(1):hover,
-.nav div:nth-child(2):hover,
-.nav div:nth-child(3):hover,
-.nav div:nth-child(4):hover,
-.nav div:nth-child(5):hover,
-.nav div:nth-child(6):hover {
-  color: rgb(153, 153, 153);
+.home:hover,
+.shop:hover,
+.prom:hover,
+.dash:hover,
+.blog:hover,
+.contact:hover {
+  color: rgb(255, 0, 0);
+  transform: scale(1.05);
 }
 
-.nav div::after {
+.home::after,
+.shop::after,
+.prom::after,
+.dash::after,
+.blog::after,
+.contact::after,
+.icons::after {
   content: "";
   position: absolute;
   bottom: -5px;
@@ -58,52 +72,54 @@
   background-color: red;
   transform: scaleX(0);
   transform-origin: right;
+  transition: transform 0.3s ease-in-out;
+}
+
+.nav div:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
 }
 
 .iconsDiv {
   display: flex;
   justify-content: center;
-}
-
-.iconsDiv div {
-  display: flex;
+  align-items: center;
   gap: 15px;
-  font-size: 18px;
 }
 
 .icons {
   padding: 8px;
   font-size: 20px;
+  color: #555;
   cursor: pointer;
   border-radius: 50%;
-  transition: 0.3s;
+  transition: background-color 0.3s, transform 0.3s, color 0.3s;
 }
 
 .icons:hover {
-  background-color: #f1f1f1;
+  color: rgb(255, 0, 0);
+  transform: scale(1.05);
 }
 
 @media (min-width: 768px) {
   .mainDiv {
     flex-direction: row;
     justify-content: space-between;
-    height: 100px;
-    padding: 0 20px;
+    height: 80px;
+    padding: 0 40px;
   }
 
   .logo {
-    margin-left: 15%;
-    font-size: 24px;
+    font-size: 28px;
   }
 
   .nav {
     gap: 40px;
-    font-size: 14px;
-    margin-left: 20%;
+    font-size: 16px;
   }
 
   .iconsDiv {
-    margin-right: 15%;
+    gap: 20px;
   }
 
   .icons {

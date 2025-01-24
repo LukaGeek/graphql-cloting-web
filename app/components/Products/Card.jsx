@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import CardSkeleton from "./CardSkeleton";
 
 export default function Card() {
   const [products, setProducts] = useState([]);
@@ -32,15 +33,7 @@ export default function Card() {
   }, []);
 
   if (loading) {
-    return <p>Loading products...</p>;
-  }
-
-  if (!products) {
-    <div>Loading products...</div>;
-  }
-
-  if (!products.length) {
-    return <p>No products available.</p>;
+    return <CardSkeleton />;
   }
 
   return (

@@ -23,6 +23,10 @@
   text-align: center;
 }
 
+.text::after {
+  content: "Deal Of The Week";
+}
+
 .circles {
   display: flex;
   justify-content: center;
@@ -62,12 +66,11 @@
 .shop {
   display: inline-block;
   padding: 10px 20px;
-  border: 1px solid #282828;
   border-radius: 5px;
   text-transform: uppercase;
   font-weight: 600;
   color: #f2f2f2;
-  background-color: #1e1e27;
+  background-color: #d32f2f;
   cursor: pointer;
   margin-top: 20px;
   transition: all 0.3s;
@@ -75,7 +78,11 @@
 }
 
 .shop:hover {
-  background-color: #535366;
+  background-color: #d32f2f60;
+}
+
+.shop::after {
+  content: "shop now";
 }
 
 @media (min-width: 768px) {

@@ -5,13 +5,21 @@ import Link from "next/link";
 export default function Hero() {
   return (
     <div className={classes.hero}>
-      <Image src="/heroImg.webp" alt="Main" width={1920} height={650} />
-      <h6 className={classes.topic}>spring / summer collection 2017</h6>
-      <h1 className={classes.text1}>Get up to 30%</h1>
-      <h1 className={classes.text2}>New Arrivals</h1>
-      <span className={classes.shop}>
-        <Link href="/">shop now</Link>
-      </span>
+      <div className={classes.overlay}></div>
+      <Image
+        draggable="false"
+        src="/heroImg.webp"
+        alt="Main"
+        fill
+        priority
+        className={classes.heroImage}
+      />
+      <div className={classes.content}>
+        <h6 className={classes.topic}></h6>
+        <h1 className={classes.text1}></h1>
+        <h1 className={classes.text2}></h1>
+        <Link href="/" className={classes.shop}></Link>
+      </div>
     </div>
   );
 }

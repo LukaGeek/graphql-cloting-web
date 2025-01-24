@@ -49,16 +49,17 @@ export default function DealOfTheWeek() {
     <div className={classes.mainDiv}>
       <div className={classes.image}>
         <Image
+          draggable="false"
           src="/deal.webp"
           alt="Deal Of The Week"
           width={600}
           height={800}
           quality={100}
-          priority={false}
+          priority
         />
       </div>
       <div className={classes.content}>
-        <h1 className={classes.text}>Deal Of The Week</h1>
+        <h1 className={classes.text}></h1>
         <div className={classes.circles}>
           <div className={`${classes.circle} ${classes.day}`}>
             <span>{timeRemaining.days}</span>
@@ -78,7 +79,7 @@ export default function DealOfTheWeek() {
           </div>
         </div>
         <span className={classes.shop}>
-          <Link href="/">shop now</Link>
+          <Link href="/"></Link>
         </span>
       </div>
     </div>

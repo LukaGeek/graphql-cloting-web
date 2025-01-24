@@ -11,9 +11,9 @@ export default function Footer() {
       <div className={classes.upper}>
         <div className={classes.leftSide}>
           <ul>
-            <li>Blog</li>
-            <li>FAQs</li>
-            <li>Contact us</li>
+            <li></li>
+            <li></li>
+            <li></li>
           </ul>
         </div>
         <div className={classes.rightSide}>
@@ -25,10 +25,7 @@ export default function Footer() {
         </div>
       </div>
       <div className={classes.bottom}>
-        <span>
-          {"\u00A9"} 2024 All Rights Reserved. This website is made by Luka
-          Linchiki
-        </span>
+        <span>{"\u00A9"}</span>
       </div>
     </div>
   );

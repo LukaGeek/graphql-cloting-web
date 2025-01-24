@@ -1,4 +1,4 @@
-import Card from "./Card";
+import Card from "./Card/Card";
 
 const getProducts = async () => {
   try {
@@ -20,10 +20,6 @@ const getProducts = async () => {
 
 export default async function NewProductCards() {
   const { products } = await getProducts();
-
-  if (!products) {
-    <div>Loading products...</div>;
-  }
 
   return (
     <div className="bg-white">

@@ -15,12 +15,20 @@
   text-align: center;
 }
 
+.firstDiv h1::after {
+  content: "Newsletter";
+}
+
 .firstDiv span {
   font-weight: inherit;
   color: #746f6f;
   text-align: center;
   font-size: 16px;
   margin-top: 8px;
+}
+
+.firstDiv span::after {
+  content: "Subscribe to our newsletter and get 20% off your first purchase";
 }
 
 .secondDiv {
@@ -80,14 +88,18 @@
   animation: slideIn 0.5s forwards;
 }
 
-.popup.animateOut {
-  animation: slideOut 0.5s forwards;
+.animateIn p {
+  content: "Thank you for subscribing! Check your email for further updates.";
 }
 
 .error {
   color: red;
   font-size: 14px;
   margin-top: 5px;
+}
+
+.error::after {
+  content: "Please enter a valid email address.";
 }
 
 @keyframes slideIn {

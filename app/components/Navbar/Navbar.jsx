@@ -1,31 +1,45 @@
+"use client";
+
 import classes from "./Navbar.module.css";
 import { IoSearchSharp } from "react-icons/io5";
-import { FaUser } from "react-icons/fa";
 import { FaCartShopping } from "react-icons/fa6";
+import Link from "next/link";
+import SignInSession from "../SignInSession";
+import { useSession } from "next-auth/react";
 
 export default function Navbar() {
+  const { data: session, status } = useSession();
+
+  if (status === "loading") {
+    return <div>Loading...</div>;
+  }
+
   return (
     <div className={classes.mainDiv}>
       <div className={classes.logo}>
-        <span>colo</span>
-        <span className={classes.red}>shop</span>
+        <span></span>
+        <span></span>
       </div>
       <div className={classes.nav}>
-        <div>home</div>
-        <div>shop</div>
-        <div>promotion</div>
-        <div>pages</div>
-        <div>blog</div>
-        <div>contact</div>
+        <div className={classes.home}>home</div>
+        <div className={classes.shop}>shop</div>
+        <div className={classes.prom}>promotion</div>
+        {session?.user && (
+          <div className={classes.dash}>
+            <Link href="/admin">dashboard</Link>
+          </div>
+        )}
+        <div className={classes.blog}>blog</div>
+        <div className={classes.contact}>contact</div>
         <div className={classes.iconsDiv}>
-          <div className={classes.icons}>
+          <div id={classes.search} className={classes.icons}>
             <IoSearchSharp />
           </div>
           <div className={classes.icons}>
             <FaCartShopping />
           </div>
           <div className={classes.icons}>
-            <FaUser />
+            <SignInSession />
           </div>
         </div>
       </div>

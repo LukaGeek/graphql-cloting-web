@@ -7,7 +7,7 @@ export default function LatestBlogs() {
   return (
     <div className={classes.mainDiv}>
       <div className={classes.header}>
-        <div className={classes.word}>Latest Blogs</div>
+        <div className={classes.word}></div>
         <span className={classes.divider}></span>
       </div>
       <div className={classes.icons}>
@@ -16,16 +16,18 @@ export default function LatestBlogs() {
             <Image
               src={`/Blogs/${image}.webp`}
               alt={`Blog ${image}`}
-              width={350}
-              height={350}
+              width={1000}
+              height={1000}
               quality={100}
-              priority={false}
+              priority
+              draggable="false"
             />
+
             <div className={classes.overlay}>
-              <div className={classes.firstHeader}>Here are the trends I</div>
-              <div className={classes.secondHeader}>see coming this fall</div>
-              <div className={classes.author}>by admin | Dec 01, 2017</div>
-              <span className={classes.readMore}>Read more</span>
+              <div className={classes.firstHeader}></div>
+              <div className={classes.secondHeader}></div>
+              <div className={classes.author}></div>
+              <span className={classes.readMore}></span>
             </div>
           </div>
         ))}

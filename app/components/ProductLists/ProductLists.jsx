@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import RemoveBtn from "../RemoveBtn";
 import { useEffect, useState } from "react";
+import ProductSkeleton from "./ProductSkeleton";
 
 export default function ProductLists() {
   const [products, setProducts] = useState([]);
@@ -32,12 +33,8 @@ export default function ProductLists() {
     fetchProducts();
   }, []);
 
-  if (!products) {
-    <div>Product not found.</div>;
-  }
-
   if (loading) {
-    return <p>Loading products...</p>;
+    return <ProductSkeleton />;
   }
 
   return (

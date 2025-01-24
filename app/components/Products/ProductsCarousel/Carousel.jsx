@@ -1,14 +1,11 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import useEmblaCarousel from "embla-carousel-react";
 import classes from "./Carousel.module.css";
 import Card from "../Card";
-import Men from "../../Gender/Men/Men";
 
-export default function CardCarousel({ options }) {
+export default function CardCarousel() {
   const [products, setProducts] = useState([]);
-  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -25,8 +22,6 @@ export default function CardCarousel({ options }) {
         setProducts(data.products || []);
       } catch (error) {
         console.error("Error loading products:", error);
-      } finally {
-        setLoading(false);
       }
     };
 
@@ -40,13 +35,14 @@ export default function CardCarousel({ options }) {
     }
   }
 
-  if (loading) {
-    return <p>Loading products...</p>;
-  }
-
   return (
     <section className={classes.embla}>
-      <Men />
+      <div>
+        <div className={classes.mainDiv}>
+          <div className={classes.word}></div>
+          <span className={classes.divider}></span>
+        </div>
+      </div>
       <div className={classes.embla__viewport}>
         <div className={classes.embla__container}>
           {chunkedCards.map((chunk, slideIndex) => (

@@ -59,6 +59,22 @@
   text-align: center;
 }
 
+.leftSide ul li:nth-child(1)::after {
+  content: "FAQs";
+}
+
+.leftSide ul li:nth-child(2)::after {
+  content: "Blog";
+}
+
+.leftSide ul li:nth-child(3)::after {
+  content: "Contact us";
+}
+
+.bottom span::after {
+  content: "2024 All Rights Reserved. This website is made by Luka Linchiki";
+}
+
 @media (max-width: 768px) {
   .upper {
     flex-direction: column;

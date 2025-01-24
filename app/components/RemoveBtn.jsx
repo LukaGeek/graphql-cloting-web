@@ -1,27 +1,47 @@
 "use client";
 
 import { useRouter } from "next/navigation";
+import { useState } from "react";
+import classes from "../components/RemoveBtn.module.css";
 
 export default function RemoveBtn({ id }) {
+  const [isSent, setIsSent] = useState(false);
   const router = useRouter();
 
   const removeProduct = async () => {
-    const confirmed = confirm("Are you sure?");
+    if (!isSent) {
+      setIsSent(true);
 
-    if (confirmed) {
       const res = await fetch(`http://localhost:3000/api/products?id=${id}`, {
         method: "DELETE",
       });
 
       if (res.ok) {
+        console.log("Product Successfully Deleted.");
         router.refresh();
       }
+
+      setTimeout(() => setIsSent(false), 5000);
     }
   };
 
   return (
-    <button onClick={removeProduct} className="btn btn-error ml-2 text-red-800">
-      Delete
-    </button>
+    <>
+      {isSent && (
+        <div
+          className={`${classes.popup} ${classes.animateIn} ${classes.slideOut}`}
+        >
+          <h2>Success!</h2>
+          <p>Product Successfully Deleted.</p>
+        </div>
+      )}
+
+      <button
+        onClick={removeProduct}
+        className="btn btn-error ml-2 text-red-800"
+      >
+        Delete
+      </button>
+    </>
   );
 }

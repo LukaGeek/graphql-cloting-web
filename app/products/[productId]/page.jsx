@@ -5,6 +5,7 @@ import { Radio, RadioGroup } from "@headlessui/react";
 import Link from "next/link";
 import Image from "next/image";
 import { useEffect, useState } from "react";
+import PageSkeleton from "./PageSkeleton";
 
 const productPath = [{ id: 1, name: "Home", path: "/" }];
 
@@ -17,7 +18,6 @@ export default function ProductOverview({ params }) {
   const [loading, setLoading] = useState(true);
 
   const query = params.productId;
-  console.log(query);
 
   const dbProduct = products.find((card) => card._id === query);
 
@@ -45,11 +45,7 @@ export default function ProductOverview({ params }) {
   }, []);
 
   if (loading) {
-    return <div>Loading products...</div>;
-  }
-
-  if (!query) {
-    return <p>Products Loading...</p>;
+    return <PageSkeleton />;
   }
 
   if (!products) {
@@ -89,7 +85,7 @@ export default function ProductOverview({ params }) {
             <div key={dbProduct._id}>
               <li className="text-sm">
                 <div className="font-medium text-gray-500 hover:text-gray-600">
-                  {dbProduct.name} (productId: {dbProduct._id})
+                  {dbProduct.name}
                 </div>
               </li>
             </div>

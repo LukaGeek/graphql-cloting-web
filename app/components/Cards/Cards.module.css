@@ -34,6 +34,18 @@
   max-width: 90%;
 }
 
+.text1::after {
+  content: "for women";
+}
+
+.text2::after {
+  content: "for kids";
+}
+
+.text3::after {
+  content: "for men";
+}
+
 .text1:hover,
 .text2:hover,
 .text3:hover {

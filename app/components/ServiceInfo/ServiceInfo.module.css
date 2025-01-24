@@ -1,119 +1,82 @@
 .mainDiv {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
   background-color: #f3f3f3;
   padding: 20px;
-  flex-wrap: wrap;
   gap: 20px;
+  flex-wrap: wrap;
   width: 100%;
   box-sizing: border-box;
 }
 
-.div,
-.div1,
-.div2,
-.div3 {
+.serviceCard {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  background-color: #f3f3f3;
+  text-align: center;
+  background-color: #ffffff;
+  border: 1px solid #ddd;
+  border-radius: 12px;
   padding: 20px;
-  width: 22%;
-  box-sizing: border-box;
-  transition: width 0.3s ease;
+  width: calc(25% - 20px);
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.icon,
-.icon1,
-.icon2,
-.icon3 {
-  font-size: 30px;
-  margin-right: 20px;
+.serviceCard:hover {
+  transform: translateY(-5px);
+  box-shadow: 0px 8px 12px rgba(0, 0, 0, 0.15);
+}
+
+.icon {
+  font-size: 40px;
   color: #fe4c50;
+  margin-bottom: 15px;
 }
 
-.info,
-.info1,
-.info2,
-.info3 {
-  display: grid;
+.info {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
 }
 
-.info span:first-of-type,
-.info1 span:first-of-type,
-.info2 span:first-of-type,
-.info3 span:first-of-type {
+.info:nth-child(1)::after {
+  content: "Free Shipping";
+}
+
+.info span:first-of-type {
   text-transform: uppercase;
   color: #282828;
   font-weight: bold;
+  font-size: 16px;
 }
 
-.info span:nth-of-type(2),
-.info1 span:nth-of-type(2),
-.info2 span:nth-of-type(2),
-.info3 span:nth-of-type(2) {
+.info span:nth-of-type(2) {
   color: #51545f;
+  font-size: 14px;
 }
 
 @media (max-width: 1024px) {
-  .div,
-  .div1,
-  .div2,
-  .div3 {
-    width: 45%;
+  .serviceCard {
+    width: calc(50% - 20px);
   }
 }
 
 @media (max-width: 768px) {
-  .div,
-  .div1,
-  .div2,
-  .div3 {
+  .serviceCard {
     width: 100%;
-    padding: 15px;
-    flex-direction: column;
-    text-align: center;
   }
 
-  .icon,
-  .icon1,
-  .icon2,
-  .icon3 {
-    margin-right: 0;
-    margin-bottom: 10px;
-  }
-}
-
-@media (max-width: 480px) {
-  .mainDiv {
-    padding: 10px;
+  .icon {
+    font-size: 36px;
   }
 
-  .div,
-  .div1,
-  .div2,
-  .div3 {
-    padding: 10px;
-  }
-
-  .icon,
-  .icon1,
-  .icon2,
-  .icon3 {
-    font-size: 24px;
-  }
-
-  .info span:first-of-type,
-  .info1 span:first-of-type,
-  .info2 span:first-of-type,
-  .info3 span:first-of-type {
+  .info span:first-of-type {
     font-size: 14px;
   }
 
-  .info span:nth-of-type(2),
-  .info1 span:nth-of-type(2),
-  .info2 span:nth-of-type(2),
-  .info3 span:nth-of-type(2) {
+  .info span:nth-of-type(2) {
     font-size: 12px;
   }
 }
