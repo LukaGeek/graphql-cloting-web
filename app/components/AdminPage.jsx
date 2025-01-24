@@ -4,7 +4,7 @@ import { Menu, Popover } from "@headlessui/react";
 import { SearchIcon } from "@heroicons/react/solid";
 import Image from "next/image";
 import Link from "next/link";
-import SignInSession from "../SignInSession";
+import SignInSession from "./SignInSession";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");

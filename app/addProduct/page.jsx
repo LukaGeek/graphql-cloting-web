@@ -2,7 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import AdminPageMain from "../components/AdminPage/AdminPage";
+import AdminPageMain from "../components/AdminPage";
 import Link from "next/link";
 
 export default function AddProduct() {

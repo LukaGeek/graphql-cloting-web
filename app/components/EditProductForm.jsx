@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import AdminPageMain from "./AdminPage/AdminPage";
+import AdminPageMain from "./AdminPage";
 import Link from "next/link";
 
 export default function EditProductForm({

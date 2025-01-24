@@ -1,6 +1,6 @@
 "use client";
 
-import AdminPageMain from "../components/AdminPage/AdminPage";
+import AdminPageMain from "../components/AdminPage";
 import ProductLists from "../components/ProductLists/ProductLists";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
