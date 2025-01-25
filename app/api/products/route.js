@@ -17,7 +17,7 @@ export async function POST(req) {
     description,
     details,
   } = await req.json();
-  await connectMongoDB;
+  await connectMongoDB();
   await ProductModel.create({
     name,
     price,

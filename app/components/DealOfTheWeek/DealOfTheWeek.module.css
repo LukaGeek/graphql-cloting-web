@@ -93,7 +93,7 @@
   }
 
   .content {
-    max-width: 500px;
+    max-width: 400px;
     text-align: center;
   }
 
@@ -106,6 +106,10 @@
   .circle {
     width: 100px;
     height: 100px;
+  }
+
+  .image {
+    max-width: 250px;
   }
 
   .circle span:first-of-type {

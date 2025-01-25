@@ -34,6 +34,7 @@ export default function AdminPageMain({ children }) {
                       height={50}
                       src="/Admin/panel.png"
                       alt="Workflow"
+                      draggable="false"
                     />
                   </Link>
                 </div>

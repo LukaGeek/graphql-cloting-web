@@ -49,13 +49,13 @@ export default function DealOfTheWeek() {
     <div className={classes.mainDiv}>
       <div className={classes.image}>
         <Image
-          draggable="false"
           src="/deal.webp"
           alt="Deal Of The Week"
           width={600}
           height={800}
           quality={100}
           priority
+          draggable="false"
         />
       </div>
       <div className={classes.content}>
