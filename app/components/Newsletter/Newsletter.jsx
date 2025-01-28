@@ -68,7 +68,7 @@ export default function Newsletter() {
       </div>
       {isSent && (
         <div
-          className={`${classes.popup} ${classes.animateIn} ${classes.slideOut}`}
+          className={`${classes.popup} ${classes.animateIn} ${classes.animateOut} ${classes.slideIn} ${classes.slideOut}`}
         >
           <h2>Success!</h2>
           <p>

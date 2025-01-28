@@ -1,8 +1,10 @@
+"use client";
+
 import localFont from "next/font/local";
 import "./globals.css";
 import { SessionProvider } from "next-auth/react";
-import { auth } from "@/auth";
 import Scrolling from "./components/Scrolling/ScrollingSystem";
+import { Toaster } from "sonner";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -15,20 +17,14 @@ const geistMono = localFont({
   weight: "100 900",
 });
 
-export const metadata = {
-  title: "Clothing Website",
-  description: "Created by Luka Linchiki",
-};
-
-export default async function RootLayout({ children }) {
-  const session = await auth();
-
+export default function RootLayout({ children }) {
   return (
-    <SessionProvider session={session}>
+    <SessionProvider>
       <html lang="en">
         <body
           className={`${geistSans.variable} ${geistMono.variable} antialiased`}
         >
+          <Toaster />
           <div>{children}</div>
           <Scrolling />
         </body>

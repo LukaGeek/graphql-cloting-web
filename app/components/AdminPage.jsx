@@ -5,6 +5,7 @@ import { SearchIcon } from "@heroicons/react/solid";
 import Image from "next/image";
 import Link from "next/link";
 import SignInSession from "./SignInSession";
+import { SessionProvider } from "next-auth/react";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -27,7 +28,7 @@ export default function AdminPageMain({ children }) {
             <div className="relative flex justify-between xl:grid xl:grid-cols-12 lg:gap-8">
               <div className="flex md:absolute md:left-0 md:inset-y-0 lg:static xl:col-span-2">
                 <div className="flex-shrink-0 flex items-center">
-                  <Link href="/admin">
+                  <Link href="/admin" prefetch={false}>
                     <Image
                       className="block h-8 w-auto"
                       width={50}
@@ -64,8 +65,9 @@ export default function AdminPageMain({ children }) {
                 </div>
               </div>
               <div className="flex items-center md:absolute md:right-0 md:inset-y-0 lg:hidden">
-                {/* Mobile menu button */}
-                <SignInSession />
+                <SessionProvider>
+                  <SignInSession />
+                </SessionProvider>
               </div>
               <div className="hidden lg:flex lg:items-center lg:justify-end xl:col-span-4">
                 <Menu as="div" className="flex-shrink-0 relative ml-5">
@@ -76,7 +78,9 @@ export default function AdminPageMain({ children }) {
                     >
                       <Link href="/">Back to Main Page</Link>
                     </button>
-                    <SignInSession />
+                    <SessionProvider>
+                      <SignInSession />
+                    </SessionProvider>
                   </div>
                 </Menu>
               </div>

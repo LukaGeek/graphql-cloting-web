@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import RemoveBtn from "../RemoveBtn";
+import DeleteProduct from "../DeleteProduct/DeleteProduct";
 import { useEffect, useState } from "react";
 import ProductSkeleton from "./ProductSkeleton";
 
@@ -44,6 +44,7 @@ export default function ProductLists() {
         <Link
           href="/addProduct"
           className="inline-flex items-center px-6 py-2 text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700"
+          prefetch={false}
         >
           Add Product
         </Link>
@@ -178,10 +179,10 @@ export default function ProductLists() {
                     {product.name}
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                    {product.type || "N/A"}
+                    {product.type}
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                    {product.brand || "N/A"}
+                    {product.brand}
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-800">
                     ${product.price}
@@ -190,10 +191,11 @@ export default function ProductLists() {
                     <Link
                       href={`/editProduct/${product._id}`}
                       className="text-indigo-600 hover:text-indigo-900"
+                      prefetch={false}
                     >
                       Edit
                     </Link>
-                    <RemoveBtn id={product._id} />
+                    <DeleteProduct id={product._id} />
                   </td>
                 </tr>
               ))

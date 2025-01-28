@@ -2,9 +2,9 @@
 
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import classes from "../components/RemoveBtn.module.css";
+import classes from "./DeleteProduct.module.css";
 
-export default function RemoveBtn({ id }) {
+export default function DeleteProduct({ id }) {
   const [isSent, setIsSent] = useState(false);
   const router = useRouter();
 
