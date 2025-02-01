@@ -20,10 +20,6 @@
   align-items: center;
 }
 
-.hidden {
-  display: none;
-}
-
 .logo span:nth-child(1):after {
   content: "COLO";
 }

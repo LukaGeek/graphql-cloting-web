@@ -18,6 +18,7 @@ export default function AddProduct() {
   const [image4, setImage4] = useState("");
   const [description, setDescription] = useState("");
   const [details, setDetails] = useState("");
+
   const router = useRouter();
 
   const handleAddColor = () => {

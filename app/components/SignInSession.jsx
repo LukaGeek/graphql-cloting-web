@@ -82,13 +82,15 @@ export default function SignInSession() {
                 </p>
                 <div className="my-2 h-px w-44 bg-gray-200"></div>
               </DropdownItem>
-              {session.user.email === "lukalinchiki0@gmail.com" && (
+              {session?.user && session?.user?.email === "test@gmail.com" && (
                 <DropdownItem
                   textValue="Manage Whitelist"
                   key="whitelist"
                   className="px-4 py-2 rounded-md text-gray-600 hover:bg-gray-50 cursor-pointer font-extrabold transition"
                 >
-                  Manage Whitelist
+                  <Link href="/whitelist" prefetch={false}>
+                    Manage Whitelist
+                  </Link>
                 </DropdownItem>
               )}
               <DropdownItem

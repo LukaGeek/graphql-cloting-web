@@ -78,7 +78,7 @@ export default function Register() {
           )}
 
           <div className="mt-8">
-            <form onSubmit={handleSubmit} className="space-y-6">
+            <form onSubmit={handleSubmit} className="space-y-6" name="text">
               <div>
                 <label
                   htmlFor="name"

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Dialog,
   DialogBackdrop,
@@ -13,27 +13,30 @@ import {
   MenuItem,
   MenuItems,
 } from "@headlessui/react";
-import { XMarkIcon } from "@heroicons/react/24/outline";
 import {
   ChevronDownIcon,
-  FunnelIcon,
-  MinusIcon,
-  PlusIcon,
-  Squares2X2Icon,
-} from "@heroicons/react/20/solid";
+  FilterIcon,
+  Minus,
+  Plus,
+  Square,
+  X,
+} from "lucide-react";
+
+import Card from "../components/Products/Card";
 
 const sortOptions = [
-  { name: "Most Popular", href: "/", current: true },
-  { name: "Best Rating", href: "/", current: false },
-  { name: "Price: Low to High", href: "/", current: false },
-  { name: "Price: High to Low", href: "/", current: false },
+  { name: "Most Popular", value: "popular" },
+  { name: "Best Rating", value: "rating" },
+  { name: "Price: Low to High", value: "priceLow" },
+  { name: "Price: High to Low", value: "priceHigh" },
 ];
+
 const subCategories = [
-  { name: "Totes", href: "/" },
-  { name: "Backpacks", href: "/" },
-  { name: "Travel Bags", href: "/" },
-  { name: "Hip Bags", href: "/" },
-  { name: "Laptop Sleeves", href: "/" },
+  { name: "Totes", href: "#" },
+  { name: "Backpacks", href: "#" },
+  { name: "Travel Bags", href: "#" },
+  { name: "Hip Bags", href: "#" },
+  { name: "Laptop Sleeves", href: "#" },
 ];
 const filters = [
   {
@@ -79,11 +82,39 @@ function classNames(...classes) {
 
 export default function ProductsFilter() {
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
+  const [products, setProducts] = useState([]);
+  const [sort, setSort] = useState("popular");
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const res = await fetch("http://localhost:3000/api/products", {
+          cache: "no-store",
+        });
+
+        if (!res.ok) {
+          throw new Error("Failed to fetch products");
+        }
+
+        const data = await res.json();
+        setProducts(data.products || []);
+      } catch (error) {
+        console.error("Error loading products:", error);
+      }
+    };
+
+    fetchProducts();
+  }, []);
+
+  const sortedProducts = [...products].sort((a, b) => {
+    if (sort === "priceLow") return a.price - b.price;
+    if (sort === "priceHigh") return b.price - a.price;
+    return 0;
+  });
 
   return (
     <div className="bg-white">
       <div>
-        {/* Mobile filter dialog */}
         <Dialog
           open={mobileFiltersOpen}
           onClose={setMobileFiltersOpen}
@@ -107,7 +138,7 @@ export default function ProductsFilter() {
                   className="-mr-2 flex size-10 items-center justify-center rounded-md bg-white p-2 text-gray-400"
                 >
                   <span className="sr-only">Close menu</span>
-                  <XMarkIcon aria-hidden="true" className="size-6" />
+                  <X aria-hidden="true" className="size-6" />
                 </button>
               </div>
 
@@ -136,11 +167,11 @@ export default function ProductsFilter() {
                           {section.name}
                         </span>
                         <span className="ml-6 flex items-center">
-                          <PlusIcon
+                          <Plus
                             aria-hidden="true"
                             className="size-5 group-data-open:hidden"
                           />
-                          <MinusIcon
+                          <Plus
                             aria-hidden="true"
                             className="size-5 group-not-data-open:hidden"
                           />
@@ -223,18 +254,17 @@ export default function ProductsFilter() {
                 >
                   <div className="py-1">
                     {sortOptions.map((option) => (
-                      <MenuItem key={option.name}>
-                        <a
-                          href={option.href}
-                          className={classNames(
-                            option.current
+                      <MenuItem key={option.value}>
+                        <button
+                          onClick={() => setSort(option.value)}
+                          className={`block px-4 py-2 text-sm ${
+                            sort === option.value
                               ? "font-medium text-gray-900"
-                              : "text-gray-500",
-                            "block px-4 py-2 text-sm data-focus:bg-gray-100 data-focus:outline-hidden"
-                          )}
+                              : "text-gray-500"
+                          } hover:bg-gray-100`}
                         >
                           {option.name}
-                        </a>
+                        </button>
                       </MenuItem>
                     ))}
                   </div>
@@ -246,7 +276,7 @@ export default function ProductsFilter() {
                 className="-m-2 ml-5 p-2 text-gray-400 hover:text-gray-500 sm:ml-7"
               >
                 <span className="sr-only">View grid</span>
-                <Squares2X2Icon aria-hidden="true" className="size-5" />
+                <Square aria-hidden="true" className="size-5" />
               </button>
               <button
                 type="button"
@@ -254,7 +284,7 @@ export default function ProductsFilter() {
                 className="-m-2 ml-4 p-2 text-gray-400 hover:text-gray-500 sm:ml-6 lg:hidden"
               >
                 <span className="sr-only">Filters</span>
-                <FunnelIcon aria-hidden="true" className="size-5" />
+                <FilterIcon aria-hidden="true" className="size-5" />
               </button>
             </div>
           </div>
@@ -291,11 +321,11 @@ export default function ProductsFilter() {
                           {section.name}
                         </span>
                         <span className="ml-6 flex items-center">
-                          <PlusIcon
+                          <Plus
                             aria-hidden="true"
                             className="size-5 group-data-open:hidden"
                           />
-                          <MinusIcon
+                          <Minus
                             aria-hidden="true"
                             className="size-5 group-not-data-open:hidden"
                           />
@@ -351,9 +381,19 @@ export default function ProductsFilter() {
                   </Disclosure>
                 ))}
               </form>
-
-              {/* Product grid */}
-              <div className="lg:col-span-3">{/* Your content */}</div>
+              <div className="lg:col-span-3">
+                <div className="grid grid-cols-3 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-6">
+                  {sortedProducts.length ? (
+                    sortedProducts.map((card) => (
+                      <Card key={card._id} id={card._id} card={card} />
+                    ))
+                  ) : (
+                    <p className="text-gray-500 col-span-full text-center">
+                      No products found.
+                    </p>
+                  )}
+                </div>
+              </div>
             </div>
           </section>
         </main>
