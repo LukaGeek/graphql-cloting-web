@@ -1,6 +1,6 @@
-export const cardsData = [
+/* export const cardsData = [
   [
-    /* For Men */
+  // For men
     {
       id: 1,
       type: "Jacket",
@@ -191,7 +191,7 @@ export const cardsData = [
     },
   ],
   [
-    /* For Women */
+    // For Women 
     {
       id: 6,
       type: "Dress",
@@ -373,7 +373,7 @@ export const cardsData = [
     },
   ],
   [
-    /* For Kids */
+    // For Kids
     {
       id: 11,
       type: "Dress",
@@ -580,3 +580,4 @@ export const cardsData = [
     },
   ],
 ];
+ */
