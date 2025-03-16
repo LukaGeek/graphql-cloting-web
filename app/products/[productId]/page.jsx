@@ -6,6 +6,8 @@ import Link from "next/link";
 import Image from "next/image";
 import PageSkeleton from "./PageSkeleton";
 import { GET_PRODUCT } from "@/graphql/queries";
+import { useQuery } from "@apollo/client";
+import { useEffect, useState } from "react";
 
 const productPath = [{ id: 1, name: "Home", path: "/" }];
 
@@ -14,10 +16,10 @@ function classNames(...classes) {
 }
 
 export default function ProductOverview({ params }) {
-  const id = params.productId;
+  const { id } = params.id;
 
   const { loading, error, data } = useQuery(GET_PRODUCT, {
-    variables: { productId: id },
+    variables: { id },
   });
 
   if (loading) {

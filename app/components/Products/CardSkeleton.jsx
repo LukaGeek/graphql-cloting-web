@@ -2,7 +2,7 @@ export default function CardSkeleton() {
   const skeletonCards = Array.from({ length: 8 });
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-[300px] gap-y-[150px] p-10">
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 mx-auto gap-y-[150px] p-10">
       {skeletonCards.map((_, index) => (
         <div
           key={index}

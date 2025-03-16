@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import {
   Dialog,
   DialogBackdrop,
@@ -23,6 +23,8 @@ import {
 } from "lucide-react";
 
 import Card from "../components/Products/Card";
+import { GET_PRODUCTS } from "@/graphql/queries";
+import { useQuery } from "@apollo/client";
 
 const sortOptions = [
   { name: "Most Popular", value: "popular" },
@@ -82,29 +84,13 @@ function classNames(...classes) {
 
 export default function ProductsFilter() {
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
-  const [products, setProducts] = useState([]);
   const [sort, setSort] = useState("popular");
 
-  useEffect(() => {
-    const fetchProducts = async () => {
-      try {
-        const res = await fetch("http://localhost:3000/api/products", {
-          cache: "no-store",
-        });
+  const { loading, error, data } = useQuery(GET_PRODUCTS);
 
-        if (!res.ok) {
-          throw new Error("Failed to fetch products");
-        }
+  if (error) return <p>Error loading products: {error.message}</p>;
 
-        const data = await res.json();
-        setProducts(data.products || []);
-      } catch (error) {
-        console.error("Error loading products:", error);
-      }
-    };
-
-    fetchProducts();
-  }, []);
+  const products = data?.products || [];
 
   const sortedProducts = [...products].sort((a, b) => {
     if (sort === "priceLow") return a.price - b.price;
@@ -142,7 +128,6 @@ export default function ProductsFilter() {
                 </button>
               </div>
 
-              {/* Filters */}
               <form className="mt-4 border-t border-gray-200">
                 <h3 className="sr-only">Categories</h3>
                 <ul role="list" className="px-2 py-3 font-medium text-gray-900">
@@ -278,6 +263,7 @@ export default function ProductsFilter() {
                 <span className="sr-only">View grid</span>
                 <Square aria-hidden="true" className="size-5" />
               </button>
+
               <button
                 type="button"
                 onClick={() => setMobileFiltersOpen(true)}
