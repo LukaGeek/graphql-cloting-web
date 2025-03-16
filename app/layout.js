@@ -5,6 +5,7 @@ import "./globals.css";
 import { SessionProvider } from "next-auth/react";
 import Scrolling from "./components/Scrolling/ScrollingSystem";
 import { Toaster } from "sonner";
+import Providers from "./components/Providers";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -19,16 +20,18 @@ const geistMono = localFont({
 
 export default function RootLayout({ children }) {
   return (
-    <SessionProvider>
-      <html lang="en">
-        <body
-          className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-        >
-          <Toaster />
-          <div>{children}</div>
-          <Scrolling />
-        </body>
-      </html>
-    </SessionProvider>
+    <Providers>
+      <SessionProvider>
+        <html lang="en">
+          <body
+            className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+          >
+            <Toaster />
+            <div>{children}</div>
+            <Scrolling />
+          </body>
+        </html>
+      </SessionProvider>
+    </Providers>
   );
 }

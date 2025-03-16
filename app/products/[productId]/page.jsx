@@ -4,8 +4,8 @@ import { MdStar } from "react-icons/md";
 import { Radio, RadioGroup } from "@headlessui/react";
 import Link from "next/link";
 import Image from "next/image";
-import { useEffect, useState } from "react";
 import PageSkeleton from "./PageSkeleton";
+import { GET_PRODUCT } from "@/graphql/queries";
 
 const productPath = [{ id: 1, name: "Home", path: "/" }];
 
@@ -14,43 +14,22 @@ function classNames(...classes) {
 }
 
 export default function ProductOverview({ params }) {
-  const [products, setProducts] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const id = params.productId;
 
-  const query = params.productId;
-
-  const dbProduct = products.find((card) => card._id === query);
-
-  useEffect(() => {
-    const fetchProducts = async () => {
-      try {
-        const res = await fetch("http://localhost:3000/api/products", {
-          cache: "no-store",
-        });
-
-        if (!res.ok) {
-          throw new Error("Failed to fetch products");
-        }
-
-        const data = await res.json();
-        setProducts(data.products);
-      } catch (error) {
-        console.error("Error loading products:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchProducts();
-  }, []);
+  const { loading, error, data } = useQuery(GET_PRODUCT, {
+    variables: { productId: id },
+  });
 
   if (loading) {
     return <PageSkeleton />;
   }
 
-  if (!products) {
+  if (error) {
+    console.error("Error loading product:", error);
     return <p>Product not found</p>;
   }
+
+  const dbProduct = data?.product;
 
   return (
     <div className="bg-white">

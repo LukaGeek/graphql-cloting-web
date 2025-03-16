@@ -2,17 +2,17 @@
 
 import AdminPageMain from "../components/AdminPage";
 import ProductLists from "../components/ProductLists/ProductLists";
-import { useSession } from "next-auth/react";
+/* import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useState } from "react"; */
 
 export default function AdminHomePage() {
-  const { data: session, status } = useSession();
+  /*   const { data: session, status } = useSession();
   const router = useRouter();
   const [whitelistedUsers, setWhitelistedUsers] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(true); */
 
-  useEffect(() => {
+  /* useEffect(() => {
     if (status === "loading") return;
 
     async function fetchWhitelist() {
@@ -30,9 +30,9 @@ export default function AdminHomePage() {
     if (session?.user) {
       fetchWhitelist();
     }
-  }, [session, status]);
+  }, [session, status]); */
 
-  useEffect(() => {
+  /* useEffect(() => {
     if (!isLoading && session?.user) {
       const isWhitelisted = whitelistedUsers.some(
         (user) => user.email === session.user.email
@@ -53,7 +53,7 @@ export default function AdminHomePage() {
     !whitelistedUsers.some((user) => user.email === session.user.email)
   ) {
     return null;
-  }
+  } */
 
   return (
     <div>

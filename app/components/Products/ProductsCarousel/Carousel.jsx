@@ -1,39 +1,18 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useQuery } from "@apollo/client";
 import classes from "./Carousel.module.css";
 import Card from "../Card";
+import { GET_PRODUCTS } from "@/graphql/queries";
+import CardSkeleton from "../CardSkeleton";
 
 export default function CardCarousel() {
-  const [products, setProducts] = useState([]);
+  const { loading, error, data } = useQuery(GET_PRODUCTS);
 
-  useEffect(() => {
-    const fetchProducts = async () => {
-      try {
-        const res = await fetch("http://localhost:3000/api/products", {
-          cache: "no-store",
-        });
+  if (loading) return <CardSkeleton />;
+  if (error) return <p>Error loading products: {error.message}</p>;
 
-        if (!res.ok) {
-          throw new Error("Failed to fetch products");
-        }
-
-        const data = await res.json();
-        setProducts(data.products || []);
-      } catch (error) {
-        console.error("Error loading products:", error);
-      }
-    };
-
-    fetchProducts();
-  }, []);
-
-  const chunkedCards = [];
-  if (products && products.length > 0) {
-    for (let i = 0; i < products.length; i++) {
-      chunkedCards.push([products[i]]);
-    }
-  }
+  const products = data?.products || [];
 
   return (
     <section className={classes.embla}>
@@ -45,12 +24,10 @@ export default function CardCarousel() {
       </div>
       <div className={classes.embla__viewport}>
         <div className={classes.embla__container}>
-          {chunkedCards.map((chunk, slideIndex) => (
-            <div className={classes.embla__slide} key={slideIndex}>
+          {products.map((product) => (
+            <div className={classes.embla__slide} key={product.id}>
               <div className="mt-10 grid bg-blue grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
-                {chunk.map((card) => (
-                  <Card key={card._id} card={card} />
-                ))}
+                <Card key={product.id} card={product} />
               </div>
             </div>
           ))}

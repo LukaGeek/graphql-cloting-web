@@ -1,15 +1,16 @@
 "use client";
 
-import EditProductForm from "@/app/components/EditProductForm";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import { useQuery } from "@apollo/client";
+import EditProductForm from "@/app/components/EditProductForm";
+import { GET_PRODUCT } from "@/graphql/queries";
 
 export default function EditProduct({ params }) {
   const { id } = params;
   const { data: session, status } = useSession();
   const router = useRouter();
-  const [product, setProduct] = useState(null);
   const [error, setError] = useState(null);
 
   useEffect(() => {
@@ -18,25 +19,23 @@ export default function EditProduct({ params }) {
     }
   }, [session, status, router]);
 
+  const {
+    loading,
+    error: queryError,
+    data,
+  } = useQuery(GET_PRODUCT, {
+    variables: { id },
+    skip: !id,
+  });
+
   useEffect(() => {
-    const fetchProduct = async () => {
-      try {
-        const res = await fetch(`http://localhost:3000/api/products/${id}`, {
-          cache: "no-store",
-        });
-        if (!res.ok) throw new Error("Failed to fetch product");
-
-        const data = await res.json();
-        setProduct(data.product);
-      } catch (err) {
-        setError(err.message);
-      }
-    };
-
-    if (id) fetchProduct();
-  }, [id]);
+    if (queryError) {
+      setError(queryError.message);
+    }
+  }, [queryError]);
 
   if (!session?.user) return null;
+
   if (error)
     return (
       <div className="flex flex-col items-center justify-center h-screen">
@@ -47,7 +46,9 @@ export default function EditProduct({ params }) {
       </div>
     );
 
-  if (!product) return <LoadingSkeleton />;
+  if (loading || !data?.product) return <LoadingSkeleton />;
+
+  const product = data?.product;
 
   return (
     <EditProductForm

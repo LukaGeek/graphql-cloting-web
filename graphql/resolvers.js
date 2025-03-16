@@ -15,8 +15,16 @@ export const resolvers = {
     addProduct: async (parent, args, context) => {
       return await context.prisma.product.create({
         data: {
-          title: args.title,
-          image: args.image,
+          name: args.name,
+          image1: args.image1,
+          image2: args.image2,
+          image3: args.image3,
+          image4: args.image4,
+          price: args.price,
+          type: args.type,
+          brand: args.brand,
+          description: args.description,
+          details: args.details,
         },
       });
     },
@@ -24,11 +32,20 @@ export const resolvers = {
       return await context.prisma.product.update({
         where: { id: args.id },
         data: {
-          title: args.title,
-          image: args.image,
+          name: args.name,
+          image1: args.image1,
+          image2: args.image2,
+          image3: args.image3,
+          image4: args.image4,
+          price: args.price,
+          type: args.type,
+          brand: args.brand,
+          description: args.description,
+          details: args.details,
         },
       });
     },
+
     deleteProduct: async (parent, args, context) => {
       return await context.prisma.product.delete({
         where: { id: args.id },

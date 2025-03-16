@@ -1,24 +1,34 @@
 "use client";
 
+import { useMutation } from "@apollo/client";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import classes from "./DeleteProduct.module.css";
+import { DELETE_PRODUCT } from "@/graphql/mutations";
 
 export default function DeleteProduct({ id }) {
   const [isSent, setIsSent] = useState(false);
   const router = useRouter();
 
+  const [deleteProduct] = useMutation(DELETE_PRODUCT, {
+    variables: { id },
+    onCompleted: () => {
+      console.log("Product Successfully Deleted.");
+      router.refresh();
+    },
+    onError: (error) => {
+      console.error("Error deleting product:", error);
+    },
+  });
+
   const removeProduct = async () => {
     if (!isSent) {
       setIsSent(true);
 
-      const res = await fetch(`http://localhost:3000/api/products?id=${id}`, {
-        method: "DELETE",
-      });
-
-      if (res.ok) {
-        console.log("Product Successfully Deleted.");
-        router.refresh();
+      try {
+        await deleteProduct();
+      } catch (error) {
+        console.error("Error occurred during deletion", error);
       }
 
       setTimeout(() => setIsSent(false), 5000);

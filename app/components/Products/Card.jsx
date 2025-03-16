@@ -1,45 +1,24 @@
 "use client";
-
-import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import CardSkeleton from "./CardSkeleton";
+import { GET_PRODUCTS } from "@/graphql/queries";
+import { useQuery } from "@apollo/client";
 
 export default function Card() {
-  const [products, setProducts] = useState([]);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const fetchProducts = async () => {
-      try {
-        const res = await fetch("http://localhost:3000/api/products", {
-          cache: "no-store",
-        });
-
-        if (!res.ok) {
-          throw new Error("Failed to fetch products");
-        }
-
-        const data = await res.json();
-        setProducts(data.products || []);
-      } catch (error) {
-        console.error("Error loading products:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchProducts();
-  }, []);
+  const { loading, error, data } = useQuery(GET_PRODUCTS);
 
   if (loading) {
     return <CardSkeleton />;
   }
+  if (error) return <p>Error loading products: {error.message}</p>;
+
+  const products = data?.products || [];
 
   return (
     <>
       {products.map((card) => (
-        <Link key={card._id} href={`/products/${card._id}`} passHref>
+        <Link key={card.id} href={`/products/${card.id}`} passHref>
           <div className="group relative bg-white rounded-lg shadow-sm transition .5s cursor-pointer">
             <div className="relative w-full h-72 rounded-lg overflow-hidden">
               <Image
@@ -57,14 +36,14 @@ export default function Card() {
               <div className="mt-1 text-sm font-semibold text-gray-500">
                 {card.brand}
               </div>
-              <div className="mt-1 text-sm text-gray-500">
+              {/* <div className="mt-1 text-sm text-gray-500">
                 {card.color?.map((color, index) => (
                   <span key={index} className="mr-2">
                     {color}
                     {index < card.color.length - 1 ? "," : ""}
                   </span>
                 )) || <span>No colors available</span>}
-              </div>
+              </div> */}
             </div>
             <div className="absolute top-0 inset-x-0 h-72 rounded-lg p-4 flex items-end justify-end overflow-hidden">
               <div

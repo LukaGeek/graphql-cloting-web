@@ -4,6 +4,8 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import AdminPageMain from "../components/AdminPage";
 import Link from "next/link";
+import { useMutation } from "@apollo/client";
+import { ADD_PRODUCT } from "@/graphql/mutations";
 
 export default function AddProduct() {
   const [name, setName] = useState("");
@@ -19,9 +21,10 @@ export default function AddProduct() {
   const [description, setDescription] = useState("");
   const [details, setDetails] = useState("");
 
+  const [addProduct, { loading, error }] = useMutation(ADD_PRODUCT);
   const router = useRouter();
 
-  const handleAddColor = () => {
+  /* const handleAddColor = () => {
     if (newColor.trim() !== "" && !color.includes(newColor)) {
       setColor([...color, newColor.trim()]);
       setNewColor("");
@@ -30,7 +33,7 @@ export default function AddProduct() {
 
   const handleRemoveColor = (clr) => {
     setColor(color.filter((c) => c !== clr));
-  };
+  }; */
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -41,14 +44,10 @@ export default function AddProduct() {
     }
 
     try {
-      const res = await fetch("http://localhost:3000/api/products", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
+      const { data } = await addProduct({
+        variables: {
           name,
-          price,
+          price: parseFloat(price),
           color,
           type,
           brand,
@@ -58,13 +57,11 @@ export default function AddProduct() {
           image4,
           description,
           details,
-        }),
+        },
       });
 
-      if (res.ok) {
+      if (data.addProduct) {
         router.push("/admin");
-      } else {
-        throw new Error("Failed to create a Product");
       }
     } catch (error) {
       console.log(error);
@@ -113,7 +110,7 @@ export default function AddProduct() {
             />
           </div>
 
-          <div className="relative border border-gray-300 rounded-md px-3 py-2 shadow-sm focus-within:ring-1 focus-within:ring-indigo-600 focus-within:border-indigo-600">
+          {/* <div className="relative border border-gray-300 rounded-md px-3 py-2 shadow-sm focus-within:ring-1 focus-within:ring-indigo-600 focus-within:border-indigo-600">
             <label
               htmlFor="color"
               className="absolute -top-2 left-2 -mt-px inline-block px-1 bg-white text-xs font-medium text-gray-900"
@@ -153,7 +150,7 @@ export default function AddProduct() {
                 </div>
               ))}
             </div>
-          </div>
+          </div> */}
 
           <div className="relative border border-gray-300 rounded-md px-3 py-2 shadow-sm focus-within:ring-1 focus-within:ring-indigo-600 focus-within:border-indigo-600">
             <label
@@ -307,13 +304,15 @@ export default function AddProduct() {
               Add Product
             </button>
             <button
-              type="submit"
+              type="button"
               className="w-[4rem] bg-indigo-600 text-white text-sm font-medium py-2 rounded-md shadow hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500"
             >
               <Link href="/admin">Back</Link>
             </button>
           </div>
         </form>
+
+        {error && <p className="text-red-500">{error.message}</p>}
       </div>
     </AdminPageMain>
   );

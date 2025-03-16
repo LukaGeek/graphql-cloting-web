@@ -1,121 +1,73 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import AdminPageMain from "./AdminPage";
+import { useMutation, useQuery } from "@apollo/client";
 import Link from "next/link";
+import { GET_PRODUCT } from "@/graphql/queries";
+import { UPDATE_PRODUCT } from "@/graphql/mutations";
 
-export default function EditProductForm({
-  id,
-  name,
-  price,
-  color,
-  type,
-  brand,
-  image1,
-  image2,
-  image3,
-  image4,
-  description,
-  details,
-}) {
-  const [products, setProducts] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [newName, setNewName] = useState(name);
-  const [newPrice, setNewPrice] = useState(price);
-  const [newColor, setNewColor] = useState(Array.isArray(color) ? color : []);
-  const [newestColor, setNewestColor] = useState("");
-  const [newType, setNewType] = useState(type);
-  const [newBrand, setNewBrand] = useState(brand);
-  const [newImage1, setNewImage1] = useState(image1);
-  const [newImage2, setNewImage2] = useState(image2);
-  const [newImage3, setNewImage3] = useState(image3);
-  const [newImage4, setNewImage4] = useState(image4);
-  const [newDescription, setNewDescription] = useState(description);
-  const [newDetails, setNewDetails] = useState(details);
+export default function EditProductForm({ id }) {
+  const { data, loading, error } = useQuery(GET_PRODUCT, {
+    variables: { id },
+  });
 
+  const [updateProduct] = useMutation(UPDATE_PRODUCT);
+  const [newName, setNewName] = useState("");
+  const [newPrice, setNewPrice] = useState("");
+  const [newType, setNewType] = useState("");
+  const [newBrand, setNewBrand] = useState("");
+  const [newImage1, setNewImage1] = useState("");
+  const [newImage2, setNewImage2] = useState("");
+  const [newImage3, setNewImage3] = useState("");
+  const [newImage4, setNewImage4] = useState("");
+  const [newDescription, setNewDescription] = useState("");
+  const [newDetails, setNewDetails] = useState("");
   const router = useRouter();
 
-  const dbProduct = products.find((card) => card._id);
-
-  const handleAddColor = () => {
-    if (newestColor.trim() && !newColor.includes(newestColor)) {
-      setNewColor([...newColor, newestColor.trim()]);
-      setNewestColor("");
-    }
-  };
-
   useEffect(() => {
-    const fetchProducts = async () => {
-      try {
-        const res = await fetch("http://localhost:3000/api/products", {
-          cache: "no-store",
-        });
-
-        if (!res.ok) {
-          throw new Error("Failed to fetch products");
-        }
-
-        const data = await res.json();
-        setProducts(data.products);
-      } catch (error) {
-        console.error("Error loading products:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchProducts();
-  }, []);
-
-  if (loading) {
-    <div>Loading...</div>;
-  }
-
-  const handleRemoveColor = (clr) => {
-    setNewColor(newColor.filter((color) => color !== clr));
-  };
-
-  useEffect(() => {
-    if (dbProduct && dbProduct.color) {
-      setNewColor(dbProduct.color);
+    if (data && data.product) {
+      const product = data.product;
+      setNewName(product.name);
+      setNewPrice(product.price);
+      setNewType(product.type);
+      setNewBrand(product.brand);
+      setNewImage1(product.image1);
+      setNewImage2(product.image2);
+      setNewImage3(product.image3);
+      setNewImage4(product.image4);
+      setNewDescription(product.description);
+      setNewDetails(product.details);
     }
-  }, [dbProduct]);
+  }, [data]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     try {
-      const res = await fetch(`http://localhost:3000/api/products/${id}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
+      await updateProduct({
+        variables: {
+          id,
+          name: newName,
+          price: newPrice,
+          type: newType,
+          brand: newBrand,
+          image1: newImage1,
+          image2: newImage2,
+          image3: newImage3,
+          image4: newImage4,
+          description: newDescription,
+          details: newDetails,
         },
-        body: JSON.stringify({
-          newName,
-          newPrice,
-          newColor,
-          newType,
-          newBrand,
-          newImage1,
-          newImage2,
-          newImage3,
-          newImage4,
-          newDescription,
-          newDetails,
-        }),
       });
-
-      if (!res.ok) {
-        throw new Error("Failed to update Product");
-      }
-
-      router.refresh();
       router.push("/admin");
     } catch (error) {
-      console.log(error);
+      console.error("Error updating product", error);
     }
   };
+
+  if (loading) return <div>Loading...</div>;
+  if (error) return <div>Error: {error.message}</div>;
 
   return (
     <AdminPageMain>
@@ -162,7 +114,7 @@ export default function EditProductForm({
               />
             </div>
 
-            <div className="relative border border-gray-300 rounded-md px-3 py-2 shadow-sm focus-within:ring-1 focus-within:ring-indigo-600 focus-within:border-indigo-600">
+            {/* <div className="relative border border-gray-300 rounded-md px-3 py-2 shadow-sm focus-within:ring-1 focus-within:ring-indigo-600 focus-within:border-indigo-600">
               <label
                 htmlFor="color"
                 className="absolute -top-2 left-2 -mt-px inline-block px-1 bg-white text-xs font-medium text-gray-900"
@@ -204,7 +156,7 @@ export default function EditProductForm({
                   </div>
                 ))}
               </div>
-            </div>
+            </div> */}
 
             <div className="relative border border-gray-300 rounded-md px-3 py-2 shadow-sm focus-within:ring-1 focus-within:ring-indigo-600 focus-within:border-indigo-600">
               <label
@@ -341,7 +293,7 @@ export default function EditProductForm({
               </label>
               <input
                 onChange={(e) => setNewDetails(e.target.value)}
-                value={newDescription}
+                value={newDetails}
                 type="text"
                 name="details"
                 id="details"
@@ -358,7 +310,7 @@ export default function EditProductForm({
                 Update Product
               </button>
               <button
-                type="submit"
+                type="button"
                 className="w-[4rem] bg-indigo-600 text-white text-sm font-medium py-2 rounded-md shadow hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500"
               >
                 <Link href="/admin">Back</Link>

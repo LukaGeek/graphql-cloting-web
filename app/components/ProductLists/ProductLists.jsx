@@ -3,39 +3,17 @@
 import Image from "next/image";
 import Link from "next/link";
 import DeleteProduct from "../DeleteProduct/DeleteProduct";
-import { useEffect, useState } from "react";
 import ProductSkeleton from "./ProductSkeleton";
+import { GET_PRODUCTS } from "@/graphql/queries";
+import { useQuery } from "@apollo/client";
 
 export default function ProductLists() {
-  const [products, setProducts] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const { loading, error, data } = useQuery(GET_PRODUCTS);
 
-  useEffect(() => {
-    const fetchProducts = async () => {
-      try {
-        const res = await fetch("http://localhost:3000/api/products", {
-          cache: "no-store",
-        });
+  if (loading) return <ProductSkeleton />;
+  if (error) return <p>Error loading products: {error.message}</p>;
 
-        if (!res.ok) {
-          throw new Error("Failed to fetch products");
-        }
-
-        const data = await res.json();
-        setProducts(data.products || []);
-      } catch (error) {
-        console.error("Error loading products:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchProducts();
-  }, []);
-
-  if (loading) {
-    return <ProductSkeleton />;
-  }
+  const products = data?.products || [];
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
@@ -120,7 +98,7 @@ export default function ProductLists() {
             ) : (
               products.map((product) => (
                 <tr
-                  key={product._id}
+                  key={product.id}
                   className="hover:bg-gray-50 transition duration-200"
                 >
                   <td className="px-6 py-4">
@@ -189,13 +167,13 @@ export default function ProductLists() {
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium space-x-2">
                     <Link
-                      href={`/editProduct/${product._id}`}
+                      href={`/editProduct/${product.id}`}
                       className="text-indigo-600 hover:text-indigo-900"
                       prefetch={false}
                     >
                       Edit
                     </Link>
-                    <DeleteProduct id={product._id} />
+                    <DeleteProduct id={product.id} />
                   </td>
                 </tr>
               ))

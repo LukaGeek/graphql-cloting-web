@@ -20,7 +20,10 @@ export default function Whitelist() {
   const { data: session, status } = useSession();
 
   useEffect(() => {
-    if (session?.user?.email !== "test@gmail.com" && status !== "loading") {
+    if (
+      session?.user?.email !== "lukalinchiki0@gmail.com" &&
+      status !== "loading"
+    ) {
       router.push("/");
     }
   }, [session, status, router]);
