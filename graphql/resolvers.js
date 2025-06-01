@@ -3,11 +3,20 @@ export const resolvers = {
     products: async (parent, args, context) => {
       return await context.prisma.product.findMany();
     },
+
     product: async (parent, args, context) => {
       const { id } = args;
       return await context.prisma.product.findUnique({
         where: { id },
       });
+    },
+
+    user: async (parent, args, context) => {
+      return await context.prisma.user.findMany();
+    },
+
+    whitelist: async (parent, args, context) => {
+      return await context.prisma.whitelist.findMany();
     },
   },
 
@@ -49,6 +58,42 @@ export const resolvers = {
     deleteProduct: async (parent, args, context) => {
       return await context.prisma.product.delete({
         where: { id: args.id },
+      });
+    },
+
+    addUser: async (parent, args, context) => {
+      return await context.prisma.user.create({
+        data: {
+          id: args.id,
+          name: args.name,
+          email: args.email,
+          password: args.password,
+        },
+      });
+    },
+
+    deleteUser: async (parent, args, context) => {
+      return await context.prisma.user.delete({
+        where: {
+          id: args.id,
+        },
+      });
+    },
+
+    addToWhitelist: async (parent, args, context) => {
+      return await context.prisma.whitelist.create({
+        data: {
+          name: args.name,
+          email: args.email,
+        },
+      });
+    },
+
+    removeFromWhitelist: async (parent, args, context) => {
+      return await context.prisma.whitelist.delete({
+        where: {
+          id: args.id,
+        },
       });
     },
   },

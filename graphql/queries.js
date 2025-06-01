@@ -35,3 +35,23 @@ export const GET_PRODUCT = gql`
     }
   }
 `;
+
+export const GET_USERS = gql`
+  query User($id: ID!) {
+    user(id: $id) {
+      id
+      name
+      email
+    }
+  }
+`;
+
+export const GET_WHITELIST = gql`
+  query Whitelist($id: ID!) {
+    whitelist(id: $id) {
+      id
+      name
+      email
+    }
+  }
+`;

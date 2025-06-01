@@ -99,3 +99,36 @@ export const UPDATE_PRODUCT = gql`
     }
   }
 `;
+
+export const ADD_TO_WHITELIST = gql`
+  mutation AddToWhitelist($id: ID!, $name: String!, $email: String!) {
+    addToWhitelist(id: $id, name: $name, email: $email) {
+      id
+      name
+      email
+    }
+  }
+`;
+
+export const ADD_USER = gql`
+  mutation AddUser(
+    $id: ID!
+    $name: String!
+    $email: String!
+    $password: String!
+  ) {
+    addUser(id: $id, name: $name, email: $email, password: $password)
+  }
+`;
+
+export const REMOVE_FROM_WHITELIST = gql`
+  mutation RemoveFromWhitelist($id: ID!) {
+    removeFromWhitelist(id: $id)
+  }
+`;
+
+export const DELETE_USER = gql`
+  mutation DeleteUser($id: ID!) {
+    deleteUser(id: $id)
+  }
+`;

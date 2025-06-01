@@ -10,66 +10,46 @@ import { Plus, Trash2, Search } from "lucide-react";
 import { motion } from "framer-motion";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import { useQuery, useMutation } from "@apollo/client";
+import { GET_USERS, GET_WHITELIST } from "@/graphql/queries";
+import { ADD_TO_WHITELIST, REMOVE_FROM_WHITELIST } from "@/graphql/mutations";
 
 export default function Whitelist() {
-  const [users, setUsers] = useState([]);
-  const [whitelistedUsers, setWhitelistedUsers] = useState([]);
   const [userSearch, setUserSearch] = useState("");
   const [whitelistSearch, setWhitelistSearch] = useState("");
   const router = useRouter();
   const { data: session, status } = useSession();
 
+  const { data: usersData } = useQuery(GET_USERS);
+  const { data: whitelistData, refetch } = useQuery(GET_WHITELIST);
+  const [addToWhitelistMutation] = useMutation(ADD_TO_WHITELIST);
+  const [removeFromWhitelistMutation] = useMutation(REMOVE_FROM_WHITELIST);
+
+  const users = usersData?.users ?? [];
+  const whitelistedUsers = whitelistData?.whitelist ?? [];
+
   useEffect(() => {
-    if (
-      session?.user?.email !== "lukalinchiki0@gmail.com" &&
-      status !== "loading"
-    ) {
-      router.push("/");
+    if (status === "loading") return;
+    if (session?.user?.email !== "lukalinchiki0@gmail.com") {
+      setTimeout(() => router.push("/"), 0);
     }
   }, [session, status, router]);
 
-  useEffect(() => {
-    async function fetchUsers() {
-      const res = await fetch("/api/users");
-      const data = await res.json();
-      setUsers(data);
-    }
-    fetchUsers();
-  }, []);
-
-  useEffect(() => {
-    async function fetchWhitelist() {
-      const res = await fetch("/api/whitelist");
-      const data = await res.json();
-      setWhitelistedUsers(data);
-    }
-    fetchWhitelist();
-  }, []);
-
   async function addToWhitelist(user) {
-    const res = await fetch("/api/whitelist", {
-      method: "POST",
-      body: JSON.stringify(user),
-      headers: { "Content-Type": "application/json" },
+    await addToWhitelistMutation({
+      variables: {
+        name: user.name,
+        email: user.email,
+      },
     });
-
-    if (res.ok) {
-      setWhitelistedUsers([...whitelistedUsers, user]);
-    }
+    refetch();
   }
 
   async function removeFromWhitelist(email) {
-    const res = await fetch("/api/whitelist", {
-      method: "DELETE",
-      body: JSON.stringify({ email }),
-      headers: { "Content-Type": "application/json" },
+    await removeFromWhitelistMutation({
+      variables: { email },
     });
-
-    if (res.ok) {
-      setWhitelistedUsers(
-        whitelistedUsers.filter((user) => user.email !== email)
-      );
-    }
+    refetch();
   }
 
   const filteredUsers = useMemo(() => {
