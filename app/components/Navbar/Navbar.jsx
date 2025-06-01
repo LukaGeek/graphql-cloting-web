@@ -6,38 +6,25 @@ import { FaCartShopping } from "react-icons/fa6";
 import SignInSession from "../SignInSession";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useQuery } from "@apollo/client";
+import { GET_WHITELIST } from "@/graphql/queries";
 
 export default function Navbar() {
   const { data: session, status } = useSession();
-  const [whitelistedUsers, setWhitelistedUsers] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
+  const {
+    data,
+    loading: whitelistLoading,
+    error,
+  } = useQuery(GET_WHITELIST, {
+    skip: status === "loading",
+  });
 
-  useEffect(() => {
-    if (status === "loading") return;
-
-    async function fetchWhitelist() {
-      try {
-        const res = await fetch("/api/whitelist");
-        const data = await res.json();
-        setWhitelistedUsers(data);
-      } catch (error) {
-        console.error("Error fetching whitelist:", error);
-      } finally {
-        setIsLoading(false);
-      }
-    }
-
-    if (session?.user) {
-      fetchWhitelist();
-    }
-  }, [session, status]);
+  const whitelistedUsers = data?.whitelist || [];
 
   const isWhitelisted =
-    !isLoading &&
+    !whitelistLoading &&
     session?.user &&
     whitelistedUsers.some((user) => user.email === session.user.email);
-  console.log(isWhitelisted);
 
   return (
     <div className={classes.mainDiv}>

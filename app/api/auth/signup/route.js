@@ -1,16 +1,13 @@
 import bcrypt from "bcryptjs";
 import { NextResponse } from "next/server";
-import User from "@/models/UserSchema";
-import connectToDatabase from "@/lib/mongodb";
+import { PrismaClient } from "@prisma/client";
+
+const prisma = new PrismaClient();
 
 export async function POST(request) {
   const { name, email, password, confirmPassword } = await request.json();
 
-  const isValidEmail = (email) => {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-    return emailRegex.test(email);
-  };
+  const isValidEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 
   if (!name || !email || !password || !confirmPassword) {
     return NextResponse.json(
@@ -26,9 +23,9 @@ export async function POST(request) {
     );
   }
 
-  if (confirmPassword !== password) {
+  if (password !== confirmPassword) {
     return NextResponse.json(
-      { message: "Password doesn't match" },
+      { message: "Passwords do not match" },
       { status: 400 }
     );
   }
@@ -41,28 +38,35 @@ export async function POST(request) {
   }
 
   try {
-    await connectToDatabase();
-    const existingUser = await User.findOne({ email });
+    // Check if user already exists
+    const existingUser = await prisma.user.findUnique({
+      where: { email },
+    });
+
     if (existingUser) {
       return NextResponse.json(
-        { message: "User already exist" },
+        { message: "User already exists" },
         { status: 400 }
       );
     }
 
+    // Hash password and create user
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    const newUser = new User({
-      email,
-      name,
-      password: hashedPassword,
+    await prisma.user.create({
+      data: {
+        name,
+        email,
+        password: hashedPassword,
+      },
     });
 
-    await newUser.save();
-
-    return NextResponse.json({ message: "User Created" }, { status: 201 });
+    return NextResponse.json(
+      { message: "User created successfully" },
+      { status: 201 }
+    );
   } catch (error) {
-    console.log(error);
+    console.error("Error creating user:", error);
     return NextResponse.json(
       { message: `Something went wrong: ${error.message}` },
       { status: 500 }

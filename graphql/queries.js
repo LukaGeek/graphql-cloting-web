@@ -19,7 +19,7 @@ export const GET_PRODUCTS = gql`
 `;
 
 export const GET_PRODUCT = gql`
-  query Products($id: ID!) {
+  query Product($id: ID!) {
     product(id: $id) {
       id
       name
@@ -37,8 +37,8 @@ export const GET_PRODUCT = gql`
 `;
 
 export const GET_USERS = gql`
-  query User($id: ID!) {
-    user(id: $id) {
+  query User {
+    user {
       id
       name
       email
@@ -47,8 +47,8 @@ export const GET_USERS = gql`
 `;
 
 export const GET_WHITELIST = gql`
-  query Whitelist($id: ID!) {
-    whitelist(id: $id) {
+  query Whitelist {
+    whitelist {
       id
       name
       email

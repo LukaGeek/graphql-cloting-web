@@ -1,13 +1,11 @@
 "use client";
 
-import { MdStar } from "react-icons/md";
-import { Radio, RadioGroup } from "@headlessui/react";
+import { RadioGroup } from "@headlessui/react";
 import Link from "next/link";
 import Image from "next/image";
 import PageSkeleton from "./PageSkeleton";
 import { GET_PRODUCT } from "@/graphql/queries";
 import { useQuery } from "@apollo/client";
-import { useEffect, useState } from "react";
 
 const productPath = [{ id: 1, name: "Home", path: "/" }];
 
