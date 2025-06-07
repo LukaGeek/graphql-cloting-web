@@ -93,3 +93,16 @@ html {
     @apply bg-background text-foreground;
   }
 }
+
+@keyframes progress-bar {
+  0% {
+    width: 0%;
+  }
+  100% {
+    width: 100%;
+  }
+}
+
+.animate-progress-bar {
+  animation: progress-bar linear forwards;
+}

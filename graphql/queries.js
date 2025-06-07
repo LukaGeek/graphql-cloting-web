@@ -42,6 +42,43 @@ export const GET_USERS = gql`
       id
       name
       email
+      password
+    }
+  }
+`;
+
+export const GET_GOOGLE_USER = gql`
+  query GoogleUser {
+    googleUser {
+      id
+      token_id
+      name
+      email
+      image
+    }
+  }
+`;
+
+export const GET_GITHUB_USER = gql`
+  query GithubUser {
+    githubUser {
+      id
+      token_id
+      name
+      email
+      image
+    }
+  }
+`;
+
+export const GET_FACEBOOK_USER = gql`
+  query FacbookUser {
+    facebookUser {
+      id
+      token_id
+      name
+      email
+      image
     }
   }
 `;

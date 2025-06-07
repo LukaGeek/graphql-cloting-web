@@ -1,13 +1,16 @@
-import Navbar from "./components/Navbar/Navbar";
-import Hero from "./components/Hero/Hero";
-import Cards from "./components/Cards/Cards";
-import DealOfTheWeek from "./components/DealOfTheWeek/DealOfTheWeek";
-import ServiceInfo from "./components/ServiceInfo/ServiceInfo";
-import LatestBlogs from "./components/LatestBlogs/LatestBlogs";
-import Newsletter from "./components/Newsletter/Newsletter";
-import Footer from "./components/Footer/Footer";
-import CardCarousel from "./components/Products/ProductsCarousel/Carousel";
-import Scrolling from "./components/Scrolling/ScrollingSystem";
+import Navbar from "./components/Navbar";
+import Hero from "./components/Hero";
+import DealOfTheWeek from "./components/DealOfTheWeek";
+import ServiceInfo from "./components/ServiceInfo";
+import LatestBlogs from "./components/LatestBlogs";
+import Newsletter from "./components/Newsletter";
+import CardCarousel from "./components/Products/Carousel";
+import Footer from "./components/Footer";
+
+export const metadata = {
+  title: "Home - COLOSHOP",
+  description: "Browse our awesome product selection.",
+};
 
 export default function Home() {
   return (
@@ -16,12 +19,10 @@ export default function Home() {
       <Hero />
       <CardCarousel />
       <DealOfTheWeek />
-      <Cards />
       <ServiceInfo />
       <LatestBlogs />
       <Newsletter />
       <Footer />
-      <Scrolling />
     </div>
   );
 }

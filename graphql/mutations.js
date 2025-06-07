@@ -58,6 +58,62 @@ export const DELETE_PRODUCT = gql`
   }
 `;
 
+export const GOOGLE_USER = gql`
+  mutation GoogleUser(
+    $token_id: String!
+    $email: String!
+    $name: String
+    $image: String
+  ) {
+    GoogleUser(token_id: $token_id, email: $email, name: $name, image: $image) {
+      id
+      token_id
+      email
+      name
+      image
+    }
+  }
+`;
+
+export const GITHUB_USER = gql`
+  mutation GithubUser(
+    $token_id: String!
+    $email: String!
+    $name: String
+    $image: String
+  ) {
+    GithubUser(token_id: $token_id, email: $email, name: $name, image: $image) {
+      id
+      token_id
+      email
+      name
+      image
+    }
+  }
+`;
+
+export const FACEBOOK_USER = gql`
+  mutation FacebookUser(
+    $token_id: String!
+    $email: String!
+    $name: String
+    $image: String
+  ) {
+    FacebookUser(
+      token_id: $token_id
+      email: $email
+      name: $name
+      image: $image
+    ) {
+      id
+      token_id
+      email
+      name
+      image
+    }
+  }
+`;
+
 export const UPDATE_PRODUCT = gql`
   mutation UpdateProduct(
     $id: ID!
@@ -101,7 +157,7 @@ export const UPDATE_PRODUCT = gql`
 `;
 
 export const ADD_TO_WHITELIST = gql`
-  mutation AddToWhitelist($id: ID!, $name: String!, $email: String!) {
+  mutation AddToWhitelist($id: ID!, $name: String, $email: String) {
     addToWhitelist(id: $id, name: $name, email: $email) {
       id
       name
@@ -110,20 +166,24 @@ export const ADD_TO_WHITELIST = gql`
   }
 `;
 
-export const ADD_USER = gql`
-  mutation AddUser(
-    $id: ID!
-    $name: String!
-    $email: String!
-    $password: String!
-  ) {
-    addUser(id: $id, name: $name, email: $email, password: $password)
+export const CREATE_USER = gql`
+  mutation CreateUser($name: String, $email: String, $password: String) {
+    createUser(name: $name, email: $email, password: $password) {
+      id
+      name
+      email
+      password
+    }
   }
 `;
 
 export const REMOVE_FROM_WHITELIST = gql`
-  mutation RemoveFromWhitelist($id: ID!) {
-    removeFromWhitelist(id: $id)
+  mutation RemoveFromWhitelist($email: String) {
+    removeFromWhitelist(email: $email) {
+      id
+      name
+      email
+    }
   }
 `;
 

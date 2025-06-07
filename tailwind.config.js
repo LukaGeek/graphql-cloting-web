@@ -1,4 +1,4 @@
-const {heroui} = require('@heroui/theme');
+const { heroui } = require("@heroui/theme");
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   darkMode: ["class"],
@@ -6,12 +6,23 @@ module.exports = {
     "./pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
-    "./node_modules/@heroui/theme/dist/components/(avatar|skeleton).js"
+    "./node_modules/@heroui/theme/dist/components/(avatar|skeleton).js",
   ],
   theme: {
     extend: {
       gridTemplateRows: {
         "[auto,auto,1fr]": "auto auto 1fr",
+      },
+      keyframes: {
+        "slide-in-out": {
+          "0%": { transform: "translateX(100%)", opacity: "0" },
+          "10%": { transform: "translateX(0)", opacity: "1" },
+          "90%": { transform: "translateX(0)", opacity: "1" },
+          "100%": { transform: "translateX(100%)", opacity: "0" },
+        },
+      },
+      animation: {
+        "slide-in-out": "slide-in-out 5s ease-in-out forwards",
       },
       colors: {
         background: "hsl(var(--background))",
@@ -62,5 +73,9 @@ module.exports = {
       },
     },
   },
-  plugins: [require("tailwindcss-animate"),require("@tailwindcss/forms"),heroui()],
+  plugins: [
+    require("tailwindcss-animate"),
+    require("@tailwindcss/forms"),
+    heroui(),
+  ],
 };

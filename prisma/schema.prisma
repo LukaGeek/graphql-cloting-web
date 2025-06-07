@@ -30,12 +30,36 @@ model Product {
 model User {
   id       String  @id @default(auto()) @map("_id") @db.ObjectId
   name     String
-  email    String  @unique
-  password String?
+  email    String?  @unique
+  password String
 }
 
 model Whitelist {
   id    String  @id @default(auto()) @map("_id") @db.ObjectId
   name  String
-  email String @unique
+  email String? @unique
+}
+
+model GithubUser {
+  id    String  @id @default(auto()) @map("_id") @db.ObjectId
+  token_id String? @unique
+  name  String
+  email String? @unique
+  image String
+}
+
+model GoogleUser {
+  id    String  @id @default(auto()) @map("_id") @db.ObjectId
+  token_id String? @unique
+  name  String
+  email String? @unique
+  image String
+}
+
+model FacebookUser {
+  id    String  @id @default(auto()) @map("_id") @db.ObjectId
+  token_id String? @unique
+  name  String
+  email String? @unique
+  image String
 }

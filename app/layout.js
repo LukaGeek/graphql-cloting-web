@@ -3,15 +3,17 @@
 import localFont from "next/font/local";
 import "./globals.css";
 import { SessionProvider } from "next-auth/react";
-import Scrolling from "./components/Scrolling/ScrollingSystem";
-import { Toaster } from "sonner";
+import Scrolling from "./components/ScrollingSystem";
 import Providers from "./components/Providers";
+import { CartProvider } from "./components/Cart/CartContext";
+import CartSidebarWrapper from "./components/CartSidebarWrapper";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
   variable: "--font-geist-sans",
   weight: "100 900",
 });
+
 const geistMono = localFont({
   src: "./fonts/GeistMonoVF.woff",
   variable: "--font-geist-mono",
@@ -22,15 +24,17 @@ export default function RootLayout({ children }) {
   return (
     <Providers>
       <SessionProvider>
-        <html lang="en">
-          <body
-            className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-          >
-            <Toaster />
-            <div>{children}</div>
-            <Scrolling />
-          </body>
-        </html>
+        <CartProvider>
+          <html lang="en">
+            <body
+              className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+            >
+              <div>{children}</div>
+              <CartSidebarWrapper />
+              <Scrolling />
+            </body>
+          </html>
+        </CartProvider>
       </SessionProvider>
     </Providers>
   );

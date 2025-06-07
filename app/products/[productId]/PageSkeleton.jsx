@@ -1,10 +1,7 @@
-// components/PageSkeleton/PageSkeleton.js
-
 export default function PageSkeleton() {
   return (
     <div className="animate-pulse bg-white">
       <div className="max-w-7xl mx-auto px-4 py-6 sm:px-6 lg:px-8">
-        {/* Breadcrumb placeholder */}
         <nav aria-label="Breadcrumb">
           <ol className="flex items-center space-x-2">
             <li className="flex items-center">
@@ -28,8 +25,6 @@ export default function PageSkeleton() {
             </li>
           </ol>
         </nav>
-
-        {/* Product image placeholder */}
         <div className="mt-6 max-w-2xl sm:px-6 lg:grid lg:grid-cols-3 lg:gap-x-8 lg:px-8">
           <div className="h-64 bg-gray-200 rounded-lg w-full lg:h-auto"></div>
           <div className="mt-6 lg:col-span-2">
@@ -37,23 +32,17 @@ export default function PageSkeleton() {
             <div className="h-48 bg-gray-200 rounded-lg w-full"></div>
           </div>
         </div>
-
-        {/* Product name and price placeholder */}
         <div className="mt-6 lg:grid lg:grid-cols-3 lg:gap-x-8">
           <div className="lg:col-span-2 lg:pr-8">
             <div className="h-6 bg-gray-200 rounded w-3/4 mb-4"></div>
             <div className="h-6 bg-gray-200 rounded w-1/2 mb-6"></div>
           </div>
-
-          {/* Add to bag button placeholder */}
           <div className="mt-4 lg:row-span-3 lg:mt-0">
             <button className="mt-6 flex items-center justify-center rounded-md bg-gray-200 w-full py-3">
               <div className="h-4 w-16 bg-gray-300 rounded"></div>
             </button>
           </div>
         </div>
-
-        {/* Description placeholder */}
         <div className="mt-10">
           <h3 className="text-sm font-medium text-gray-900">Description</h3>
           <div className="space-y-6 mt-4">
@@ -62,8 +51,6 @@ export default function PageSkeleton() {
             <div className="h-4 bg-gray-200 rounded w-5/6"></div>
           </div>
         </div>
-
-        {/* Details placeholder */}
         <div className="mt-10">
           <h2 className="text-sm font-medium text-gray-900">Details</h2>
           <div className="mt-4 space-y-6">
