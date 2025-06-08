@@ -1,18 +1,18 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import Image from "next/image";
 import Link from "next/link";
+
+const targetDate = new Date();
+targetDate.setDate(targetDate.getDate() + 14);
 
 export default function DealOfTheWeek() {
   const [mounted, setMounted] = useState(false);
 
-  const targetDate = new Date();
-  targetDate.setDate(targetDate.getDate() + 14);
-
-  const calculateTimeRemaining = () => {
+  const calculateTimeRemaining = useCallback(() => {
     const now = new Date();
-    const timeDiff = targetDate - now;
+    const timeDiff = targetDate.getTime() - now.getTime();
 
     if (timeDiff <= 0) {
       return { days: 0, hours: 0, minutes: 0, seconds: 0 };
@@ -26,7 +26,7 @@ export default function DealOfTheWeek() {
     const seconds = Math.floor((timeDiff % (1000 * 60)) / 1000);
 
     return { days, hours, minutes, seconds };
-  };
+  }, []);
 
   const [timeRemaining, setTimeRemaining] = useState(calculateTimeRemaining());
 
@@ -38,11 +38,9 @@ export default function DealOfTheWeek() {
     }, 1000);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [calculateTimeRemaining]);
 
-  if (!mounted) {
-    return null;
-  }
+  if (!mounted) return null;
 
   return (
     <div className="flex flex-col md:flex-row items-center justify-center gap-8 p-6 bg-gray-100 min-h-[60vh]">
@@ -63,38 +61,20 @@ export default function DealOfTheWeek() {
           Deal Of The Week
         </h1>
         <div className="flex flex-wrap justify-center gap-4 mb-6">
-          <div className="flex flex-col items-center justify-center w-20 h-20 md:w-24 md:h-24 rounded-full border border-gray-300 bg-white shadow-md">
-            <span className="text-2xl md:text-3xl font-bold text-red-500">
-              {timeRemaining.days}
-            </span>
-            <span className="text-sm text-gray-600">
-              Day{timeRemaining.days !== 1 ? "s" : ""}
-            </span>
-          </div>
-          <div className="flex flex-col items-center justify-center w-20 h-20 md:w-24 md:h-24 rounded-full border border-gray-300 bg-white shadow-md">
-            <span className="text-2xl md:text-3xl font-bold text-red-500">
-              {timeRemaining.hours}
-            </span>
-            <span className="text-sm text-gray-600">
-              Hour{timeRemaining.hours !== 1 ? "s" : ""}
-            </span>
-          </div>
-          <div className="flex flex-col items-center justify-center w-20 h-20 md:w-24 md:h-24 rounded-full border border-gray-300 bg-white shadow-md">
-            <span className="text-2xl md:text-3xl font-bold text-red-500">
-              {timeRemaining.minutes}
-            </span>
-            <span className="text-sm text-gray-600">
-              Min{timeRemaining.minutes !== 1 ? "s" : ""}
-            </span>
-          </div>
-          <div className="flex flex-col items-center justify-center w-20 h-20 md:w-24 md:h-24 rounded-full border border-gray-300 bg-white shadow-md">
-            <span className="text-2xl md:text-3xl font-bold text-red-500">
-              {timeRemaining.seconds}
-            </span>
-            <span className="text-sm text-gray-600">
-              Sec{timeRemaining.seconds !== 1 ? "s" : ""}
-            </span>
-          </div>
+          {["days", "hours", "minutes", "seconds"].map((unit) => (
+            <div
+              key={unit}
+              className="flex flex-col items-center justify-center w-20 h-20 md:w-24 md:h-24 rounded-full border border-gray-300 bg-white shadow-md"
+            >
+              <span className="text-2xl md:text-3xl font-bold text-red-500">
+                {timeRemaining[unit]}
+              </span>
+              <span className="text-sm text-gray-600">
+                {unit.charAt(0).toUpperCase() + unit.slice(1).replace(/s$/, "")}
+                {timeRemaining[unit] !== 1 ? "s" : ""}
+              </span>
+            </div>
+          ))}
         </div>
         <Link
           href="/products"

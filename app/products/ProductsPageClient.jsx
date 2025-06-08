@@ -10,7 +10,7 @@ import Navbar from "../components/Navbar";
 
 export default function ProductsPageClient() {
   const { loading, error, data } = useQuery(GET_PRODUCTS);
-  const products = data?.products || [];
+  const products = useMemo(() => data?.products || [], [data]);
 
   const searchParams = useSearchParams();
   const initialSearch = searchParams.get("search") || "";

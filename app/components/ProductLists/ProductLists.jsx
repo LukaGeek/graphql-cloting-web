@@ -17,7 +17,7 @@ export default function ProductLists() {
   const [priceFilter, setPriceFilter] = useState("");
   const [showFilters, setShowFilters] = useState(false);
 
-  const products = data?.products || [];
+  const products = useMemo(() => data?.products || [], [data]);
 
   const filteredProducts = useMemo(() => {
     return products.filter((product) => {
